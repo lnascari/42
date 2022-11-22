@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:20:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/21 18:53:44 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:15:07 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,38 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-static int	ft_len(char *s, int size)
+static int	ft_check(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != '\n' || s[i] != 0)
+	if (!s)
+		return (1);
+	while (s[i] != '\n' && s[i] != 0)
 	{
-		if (i == size - 1)
-			return (-1);
+		if (i == BUFFER_SIZE - 1)
+			return (1);
 		i++;
 	}
-	return (i);
+	return (0);
 }
 
 static int	ft_read(char **s, int fd)
 {
 	char	*tmp;
-	int		size;
+	int		b;
 
-	size = BUFFER_SIZE;
-	*s = calloc(BUFFER_SIZE + 1, 1);
-	if (!*s || read(fd, *s, BUFFER_SIZE) == -1)
-		return (0);
-	while (ft_len(*s, size) == -1)
+	b = ft_check(*s);
+	while (b)
 	{
-		size += BUFFER_SIZE;
-		tmp = calloc(BUFFER_SIZE + 1, 1);
-		if (!tmp || read(fd, *s, size) == -1)
+		tmp = calloc(BUFFER_SIZE, 1);
+		if (!*tmp || read(fd, tmp, BUFFER_SIZE) == -1)
 			return (0);
-		*s = ft_strjoin(*s, tmp);
+		b = ft_check(tmp);
+		if (!*s)
+			*s = tmp;
+		else
+			*s = ft_strjoin(*s, tmp);
 	}
 	return (1);
 }
@@ -68,7 +70,7 @@ static char	*get_line(char **s, int *i)
 	char	*line;
 
 	size = ft_size(*s + *i);
-	if (size < 0)
+	if (size <= 0)
 	{
 		line = malloc(size * -1 + 1);
 		if (!line)
@@ -91,14 +93,13 @@ static char	*get_line(char **s, int *i)
 char	*get_next_line(int fd)
 {
 	static char	*s;
-	static int	i;
 
-	if (i == -1)
+	if (BUFFER_SIZE <= 0)
 		return (0);
 	if (!s)
 	{
 		if (!ft_read(&s, fd))
 			return (0);
 	}
-	return (get_line(&s, &i));
+	return (get_line(&s));
 }
