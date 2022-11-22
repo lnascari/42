@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:20:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/18 15:36:11 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:53:44 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,31 @@ static int	ft_len(char *s, int size)
 	i = 0;
 	while (s[i] != '\n' || s[i] != 0)
 	{
-		if (i == size)
+		if (i == size - 1)
 			return (-1);
 		i++;
 	}
 	return (i);
 }
 
-static void	ft_read(char **s, int fd)
+static int	ft_read(char **s, int fd)
 {
-	int	size;
+	char	*tmp;
+	int		size;
 
 	size = BUFFER_SIZE;
-	*s = malloc(size + 1);
-	if (read(fd, s, size) == -1)
+	*s = calloc(BUFFER_SIZE + 1, 1);
+	if (!*s || read(fd, *s, BUFFER_SIZE) == -1)
 		return (0);
-	while (ft_len(s, size) == -1)
+	while (ft_len(*s, size) == -1)
 	{
-		free(*s);
 		size += BUFFER_SIZE;
-		*s = malloc(size + 1);
-		if (read(fd, *s, size) == -1)
+		tmp = calloc(BUFFER_SIZE + 1, 1);
+		if (!tmp || read(fd, *s, size) == -1)
 			return (0);
+		*s = ft_strjoin(*s, tmp);
 	}
-	*s[size] = 0;
+	return (1);
 }
 
 static int	ft_size(char *s)
@@ -61,25 +62,28 @@ static int	ft_size(char *s)
 	return (i);
 }
 
-static char	*get_line(char **s)
+static char	*get_line(char **s, int *i)
 {
 	int		size;
 	char	*line;
 
-	size = ft_size(*s);
+	size = ft_size(*s + *i);
 	if (size < 0)
 	{
 		line = malloc(size * -1 + 1);
-		ft_strlcpy(line, *s, size * -1 + 1);
+		if (!line)
+			return (0);
+		ft_strlcpy(line, *s + *i, size * -1 + 1);
 		free(*s);
-		*s = malloc(1);
-		s[0] = 0;
+		*i = -1;
 	}
 	else
 	{
 		line = malloc(size + 2);
-		ft_strlcpy(line, *s, size + 2);
-		*s = *s + (size + 1);
+		if (!line)
+			return (0);
+		ft_strlcpy(line, *s + *i, size + 2);
+		*i = *i + (size + 1);
 	}
 	return (line);
 }
@@ -87,10 +91,14 @@ static char	*get_line(char **s)
 char	*get_next_line(int fd)
 {
 	static char	*s;
+	static int	i;
 
-	if (!s)
-		ft_read(&s, fd);
-	if (s[0] == 0 || (!s))
+	if (i == -1)
 		return (0);
-	return (get_line(&s));
+	if (!s)
+	{
+		if (!ft_read(&s, fd))
+			return (0);
+	}
+	return (get_line(&s, &i));
 }
