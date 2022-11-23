@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:20:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/22 15:15:07 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:57:59 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static int	ft_read(char **s, int fd)
 	b = ft_check(*s);
 	while (b)
 	{
-		tmp = calloc(BUFFER_SIZE, 1);
-		if (!*tmp || read(fd, tmp, BUFFER_SIZE) == -1)
+		tmp = ft_calloc(BUFFER_SIZE, 1);
+		if (!tmp || read(fd, tmp, BUFFER_SIZE) == -1)
 			return (0);
 		b = ft_check(tmp);
 		if (!*s)
@@ -64,28 +64,26 @@ static int	ft_size(char *s)
 	return (i);
 }
 
-static char	*get_line(char **s, int *i)
+static char	*get_line(char **s)
 {
 	int		size;
 	char	*line;
+	char	*tmp;
 
-	size = ft_size(*s + *i);
+	size = ft_size(*s);
 	if (size <= 0)
 	{
-		line = malloc(size * -1 + 1);
+		line = ft_strlcpy(*s, size * -1 + 1, 1);
 		if (!line)
 			return (0);
-		ft_strlcpy(line, *s + *i, size * -1 + 1);
-		free(*s);
-		*i = -1;
+		*s = ft_calloc(1, 1);
 	}
 	else
 	{
-		line = malloc(size + 2);
-		if (!line)
+		line = ft_strlcpy(*s, size + 2, 0);
+		*s = ft_strlcpy(*s + (size + 1), ft_strlen(*s) - size, 1);
+		if (!line || !*s)
 			return (0);
-		ft_strlcpy(line, *s + *i, size + 2);
-		*i = *i + (size + 1);
 	}
 	return (line);
 }
@@ -93,13 +91,10 @@ static char	*get_line(char **s, int *i)
 char	*get_next_line(int fd)
 {
 	static char	*s;
-
-	if (BUFFER_SIZE <= 0)
+	
+	if ((s && s[0] == 0) || BUFFER_SIZE <= 0)
 		return (0);
-	if (!s)
-	{
-		if (!ft_read(&s, fd))
-			return (0);
-	}
+	if (!ft_read(&s, fd))
+		return (0);
 	return (get_line(&s));
 }

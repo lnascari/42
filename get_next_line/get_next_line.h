@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:16:00 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/22 13:56:50 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:37:25 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # endif
 
 char	*get_next_line(int fd);
-void	ft_strlcpy(char *dst, char *src, int size);
+char	*ft_strlcpy(char *src, int size, int clean);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(const char *s);
 
 #endif

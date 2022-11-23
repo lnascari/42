@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:18:03 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/22 12:32:23 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:37:51 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_bzero(void *s, size_t n)
 	}
 }
 
-static size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -62,7 +62,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	int				j;
 
 	l = ft_strlen(s1) + ft_strlen(s2) + 1;
-	p = calloc(l, 1);
+	p = ft_calloc(l, 1);
 	if (!p)
 		return (0);
 	j = 0;
@@ -77,10 +77,12 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (p);
 }
 
-void	ft_strlcpy(char *dst, char *src, int size)
+char	*ft_strlcpy(char *src, int size, int clean)
 {
-	int	i;
+	int		i;
+	char	*dst;
 
+	dst = ft_calloc(size, 1);
 	if (size != 0)
 	{
 		i = 0;
@@ -91,4 +93,7 @@ void	ft_strlcpy(char *dst, char *src, int size)
 		}
 		dst[i] = 0;
 	}
+	if (clean)
+		free(src);
+	return (dst);
 }
