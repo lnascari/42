@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:20:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/23 17:24:48 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:25:48 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "get_next_line.h"
+#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 static int	ft_check(char *s, int b)
 {
@@ -102,11 +103,12 @@ static char	*get_line(char **s)
 
 char	*get_next_line(int fd)
 {
-	static char	*s;
+	static char	*s[FOPEN_MAX];
 
-	if ((s && s[0] == 0) || BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
+	if ((s[fd] && s[fd][0] == 0) || BUFFER_SIZE <= 0 ||
+		fd < 0 || read(fd, 0, 0) < 0)
 		return (0);
-	if (!ft_read(&s, fd))
+	if (!ft_read(&s[fd], fd))
 		return (0);
-	return (get_line(&s));
+	return (get_line(&s[fd]));
 }
