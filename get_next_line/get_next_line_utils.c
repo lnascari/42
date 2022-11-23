@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:18:03 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/23 12:37:51 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:09:11 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (p);
 }
 
-char	*ft_strlcpy(char *src, int size, int clean)
+char	*ft_strlcpy(char *src, int size, void *clean)
 {
 	int		i;
 	char	*dst;
@@ -94,6 +94,6 @@ char	*ft_strlcpy(char *src, int size, int clean)
 		dst[i] = 0;
 	}
 	if (clean)
-		free(src);
+		free(clean);
 	return (dst);
 }
