@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:20:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/23 17:24:48 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:03:34 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ static int	ft_read(char **s, int fd)
 		if (!tmp || read(fd, tmp, BUFFER_SIZE) == -1)
 			return (0);
 		if (tmp[0] == 0)
+		{
+			free(tmp);
 			return (0);
+		}
 		b = ft_check(tmp, 1);
 		if (!*s)
 			*s = tmp;
