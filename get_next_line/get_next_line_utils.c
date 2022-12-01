@@ -6,25 +6,11 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:18:03 by lnascari          #+#    #+#             */
-/*   Updated: 2022/11/23 17:26:14 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/12/01 11:56:41 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
-static void	ft_bzero(void *s, size_t n)
-{
-	char	*str;
-	int		i;
-
-	i = 0;
-	str = s;
-	while ((long unsigned int) i < n)
-	{
-		str[i] = 0;
-		i++;
-	}
-}
 
 size_t	ft_strlen(const char *s)
 {
@@ -40,7 +26,8 @@ size_t	ft_strlen(const char *s)
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*p;
+	char	*p;
+	size_t	i;
 
 	if (!nmemb || !size)
 	{
@@ -50,7 +37,9 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	p = malloc(nmemb * size);
 	if (!p)
 		return (0);
-	ft_bzero(p, nmemb * size);
+	i = -1;
+	while (++i < nmemb * size)
+		*(p + i) = 0;
 	return (p);
 }
 
@@ -77,25 +66,18 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (p);
 }
 
-char	*ft_strlcpy(char *src, int size, void *clean)
+char	*ft_strchr(char *s, int c)
 {
-	int		i;
-	char	*dst;
+	int	i;
 
-	dst = ft_calloc(size, 1);
-	if (!dst)
-		return (0);
-	if (size != 0)
+	i = 0;
+	while (s[i] != 0)
 	{
-		i = 0;
-		while (i < size - 1 && src[i] != 0)
-		{
-			dst[i] = src [i];
-			i++;
-		}
-		dst[i] = 0;
+		if (s[i] == c)
+			return (s + i);
+		i++;
 	}
-	if (clean)
-		free(clean);
-	return (dst);
+	if (c == 0)
+		return (s + i);
+	return (0);
 }
