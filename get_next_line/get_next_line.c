@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:20:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/12/01 12:07:59 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:37:49 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,23 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-static int	ft_read(char **s, int fd)
+static char	*ft_read(char *s, int fd)
 {
 	char	*tmp;
+	int		check;
 
-	while (!*s || !ft_strchr(*s, '\n'))
+	check = 1;
+	tmp = ft_calloc(1, BUFFER_SIZE + 1);
+	if (!s)
+		s = ft_calloc(1, 1);
+	while (check > 0 && !ft_strchr(s, '\n'))
 	{
-		tmp = ft_calloc(BUFFER_SIZE + 1, 1);
-		if (!tmp || read(fd, tmp, BUFFER_SIZE) == -1)
-			return (0);
-		if (tmp[0] == 0)
-		{
-			free(tmp);
-			return (0);
-		}
-		if (!*s)
-			*s = tmp;
-		else
-			*s = ft_strjoin(*s, tmp);
-		if (!*s)
-			return (0);
+		check = read(fd, tmp, BUFFER_SIZE);
+		tmp[check] = '\0';
+		s = ft_strjoin(s, tmp);
 	}
-	return (1);
+	free(tmp);
+	return (s);
 }
 
 static char	*new_str(char *s)
@@ -62,34 +57,39 @@ static char	*new_str(char *s)
 	return (str);
 }
 
-static char	*get_line(char **s)
+static char	*get_line(char *s)
 {
 	int		size;
 	int		i;
 	char	*line;
 
 	size = 0;
-	while (*s[size] && *s[size] != '\n')
+	if (!s[size])
+		return (0);
+	while (s[size] && s[size] != '\n')
 		size++;
-	if (*s[size] == '\n')
+	if (s[size] == '\n')
 		size++;
 	line = ft_calloc(size + 1, 1);
 	if (!line)
 		return (0);
 	i = -1;
 	while (++i < size)
-		line[i] = *s[i];
-	*s = new_str(*s);
+		line[i] = s[i];
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*s;
+	char		*line;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (0);
-	if (!ft_read(&s, fd))
+	s = ft_read(s, fd);
+	if (!s)
 		return (0);
-	return (get_line(&s));
+	line = get_line(s);
+	s = new_str(s);
+	return (line);
 }

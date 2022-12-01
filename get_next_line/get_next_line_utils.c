@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:18:03 by lnascari          #+#    #+#             */
-/*   Updated: 2022/12/01 11:56:41 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:38:00 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i] != 0)
 		p[j++] = s2[i++];
 	free(s1);
-	free(s2);
 	return (p);
 }
 
