@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:20:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/12/01 15:09:21 by lnascari         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:24:38 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (0);
 	s[fd] = ft_read(s[fd], fd);
-	if (!s)
+	if (!s[fd])
 		return (0);
 	line = get_line(s[fd]);
 	s[fd] = new_str(s[fd]);
