@@ -6,7 +6,8 @@ NAME = libftprintf.a
 
 LIBS = minilibx-linux/libmlx_Linux.a -lXext -lX11 -lm -lz
 
-all: $(NAME)
+all: #$(NAME)
+	gcc -Wall -Wextra -Werror main.c fractal.o minilibx-linux/libmlx.a -lXext -lX11 -lm -lz
 $(NAME): $(OBJ)
 	ar -crs $(NAME) $?
 %.o: %.c
