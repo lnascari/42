@@ -80,5 +80,4 @@ int	main(int argc, char **argv)
 			window(1, 0.277916, 0.01);
 		}
 	}
-	
 }

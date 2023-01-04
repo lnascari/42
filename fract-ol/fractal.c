@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
+#define C n*0x11100110
 
 int	check(double z_re, double z_im, double c_re, double c_im)
 {
@@ -39,7 +40,7 @@ void	color(int n, int x, int y, t_vars *vars)
 	{
 		c = 30 + (n - 1) % 225;
 		mlx_pixel_put(vars->mlx_ptr, vars->win_ptr, x, y,
-			c * 1000000 + (c * 2 % 255) * 1000 + c * 3 % 255);
+			129 * 1000000 + c * 1000 + (c * 3 % 255) + n*0x030805);
 	}
 	else
 		mlx_pixel_put(vars->mlx_ptr, vars->win_ptr, x, y, 0);
