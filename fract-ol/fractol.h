@@ -14,7 +14,7 @@
 # define FRACTOL_H
 # define HEIGHT 800
 # define WIDTH 800
-# define MAX_ITERATIONS 1500
+# define MAX_ITERATIONS 820
 # include "./minilibx-linux/mlx.h"
 # include <stdlib.h>
 
