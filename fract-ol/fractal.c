@@ -6,12 +6,11 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 14:52:41 by lnascari          #+#    #+#             */
-/*   Updated: 2022/12/19 15:34:40 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/01/05 11:20:42 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#define C n*0x11100110
 
 int	check(double z_re, double z_im, double c_re, double c_im)
 {
@@ -40,7 +39,7 @@ void	color(int n, int x, int y, t_vars *vars)
 	{
 		c = 30 + (n - 1) % 225;
 		mlx_pixel_put(vars->mlx_ptr, vars->win_ptr, x, y,
-			129 * 1000000 + c * 1000 + (c * 3 % 255) + n*0x030805);
+			129 * 1000000 + c * 1000 + (c * 3 % 255) + n * 0x030805);
 	}
 	else
 		mlx_pixel_put(vars->mlx_ptr, vars->win_ptr, x, y, 0);
@@ -64,7 +63,8 @@ void	fractal(t_vars *vars)
 		{
 			c_re = vars->min_re + x * vars->re_factor;
 			if (vars->julia)
-				color(check(c_re, c_im, vars->re_arg, vars->im_arg), x, y, vars);
+				color(check(c_re, c_im, vars->re_arg, vars->im_arg),
+					x, y, vars);
 			else
 				color(check(c_re, c_im, c_re, c_im), x, y, vars);
 		}
