@@ -12,11 +12,20 @@
 
 #include "fractol.h"
 
+int	hook(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
+	exit(0);
+	return (0);
+}
+
 int	key_hook(int keycode, t_vars *vars)
 {
-	(void) vars;
 	if (keycode == 65307)
+	{
+		mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
 		exit(0);
+	}
 	return (0);
 }
 
@@ -63,13 +72,14 @@ void	window(int julia, double re, double im)
 	vars.julia = julia;
 	fractal(&vars);
 	mlx_hook(vars.win_ptr, 2, (1L << 0), key_hook, &vars);
+	mlx_hook(vars.win_ptr, 17, 0, hook, &vars);
 	mlx_mouse_hook(vars.win_ptr, mouse_hook, &vars);
 	mlx_loop(vars.mlx_ptr);
 }
 
 int	main(int argc, char **argv)
 {
-	if (argc == 2)
+	if (argc >= 2)
 	{
 		if (argv[1][0] == 'm')
 		{
@@ -77,7 +87,9 @@ int	main(int argc, char **argv)
 		}
 		if (argv[1][0] == 'j')
 		{
-			window(1, 0.277916, 0.01);
+			window(1, 0.28072598610057, 0.0087);
 		}
 	}
+	else
+		write(1, HELP, 172);
 }
