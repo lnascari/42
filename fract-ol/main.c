@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 14:26:14 by lnascari          #+#    #+#             */
-/*   Updated: 2022/12/19 16:04:23 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:53:30 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,25 @@ void	window(int julia, double re, double im)
 
 int	main(int argc, char **argv)
 {
-	if (argc >= 2)
+	double	c_re;
+	double	c_im;
+
+	if (argc == 2)
 	{
-		if (argv[1][0] == 'm')
-		{
+		if (!ft_strcmp(ft_tolower(argv[1]), "mandelbrot"))
 			window(0, 0, 0);
-		}
-		if (argv[1][0] == 'j')
-		{
+		if (!ft_strcmp(ft_tolower(argv[1]), "julia"))
 			window(1, 0.28072598610057, 0.0087);
+	}
+	if (argc == 4)
+	{
+		if (!ft_strcmp(ft_tolower(argv[1]), "julia"))
+		{
+			c_re = num(argv[2]);
+			c_im = num(argv[3]);
+			if (c_re != -1 && c_im != -1)
+				window(1, c_re, c_im);
 		}
 	}
-	else
-		write(1, HELP, 172);
+	write(1, HELP, 157);
 }

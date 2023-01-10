@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 14:43:50 by lnascari          #+#    #+#             */
-/*   Updated: 2022/12/19 15:34:50 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:51:52 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # define WIDTH 800
 # define MAX_ITERATIONS 730
 # define HELP "Usage:\n\n  fractol mandelbrot\n\n  fractol julia [C_RE] [C_IM]\n\
-	\n    double C_RE (-1 >= && 1 =<)  default: 0.28072598610057\
-	\n    double C_IM (-1 >= && 1 <=)  default: 0.0087\n"
+	\n    float C_RE (-1 > && 1 <)  default: 0.2807\
+	\n    float C_IM (-1 > && 1 <)  default: 0.0087\n\n"
 
 typedef struct s_vars
 {
@@ -44,5 +44,9 @@ typedef struct s_vars
 }	t_vars;
 
 void	fractal(t_vars *vars);
+char	*ft_tolower(char *s);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_atoi(const char *str);
+double	num(char *s);
 
 #endif

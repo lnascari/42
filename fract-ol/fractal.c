@@ -6,12 +6,11 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 14:52:41 by lnascari          #+#    #+#             */
-/*   Updated: 2023/01/05 11:20:42 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/01/10 09:41:43 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 void	image(t_vars *vars)
 {

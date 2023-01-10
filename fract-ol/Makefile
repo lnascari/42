@@ -1,4 +1,4 @@
-FILES = fractal.c
+FILES = fractal.c utils.c ft_atoi.c
 
 OBJ = $(FILES:.c=.o)
 
