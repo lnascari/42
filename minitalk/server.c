@@ -6,43 +6,49 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 11:54:25 by lnascari          #+#    #+#             */
-/*   Updated: 2023/01/13 11:59:43 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:20:07 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
+#include "minitalk.h"
 
-char	g_c;
+unsigned char	g_c;
 
-int	handler(int signum)
+void	handler(int signum, siginfo_t *info, void *context)
 {
 	static int	x;
 
+	(void) context;
+	if (signum == SIGUSR2)
+		g_c = g_c | 1;
+	if (x != 7)
+		g_c = g_c << 1;
+	x++;
 	if (x == 8)
 	{
 		x = 0;
-		write(1, &g_c, 1);
-	}
-	else
-		x++;
-	if (signum == SIGUSR1)
-	{
-		printf("Received 1!\n");
-		g_c = g_c << 1;
-	}
-	if (signum == SIGUSR2)
-	{
-		printf("Received 2!\n");
-		g_c = g_c | 1;
-		g_c = g_c << 1;
+		if (g_c != 0)
+			write(1, &g_c, 1);
+		else
+			kill(info->si_pid, SIGUSR1);
+		g_c = 0;
 	}
 }
 
 int	main(void)
 {
 	struct sigaction	action;
-	struct sigaction	old;
+	struct sigaction	old_action;
+	int					pid;
 
-	action.sa_handler = &handler;
-	old.sa_handler = &handler;
+	action.sa_sigaction = &handler;
+	action.sa_flags = SA_SIGINFO;
+	pid = getpid();
+	write(1, "PID Server: ", 13);
+	ft_putnbr(pid);
+	write(1, "\n", 2);
+	sigaction(SIGUSR2, &action, &old_action);
+	sigaction(SIGUSR1, &action, &old_action);
+	while (1)
+		;
 }
