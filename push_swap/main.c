@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:02:07 by lnascari          #+#    #+#             */
-/*   Updated: 2023/01/19 14:27:49 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:54:16 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	duplicates(int *arr, int len)
 		j = i;
 		while (++j < len)
 		{
-			if (arr[i] == arr [j])
+			if (arr[i] == arr[j])
 				error(arr);
 		}
 	}
@@ -67,5 +67,6 @@ int	main(int argc, char **argv)
 		while (--i > 0)
 			arr[j++] = check(argv[i], arr);
 		duplicates(arr, argc - 1);
-	}	
+		sort(arr, argc - 1);
+	}
 }
