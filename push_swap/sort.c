@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:19:26 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 13:54:41 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/01 23:22:39 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void	sort(int *stack_a, int size_a)
 	sort_3(stack_a, &size_a);
 	while (size_b != 0)
 		sort_b(stack_a, stack_b, &size_a, &size_b);
+	final_sort(stack_a, size_a);
 	done(stack_a, stack_b);
 }

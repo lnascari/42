@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 11:55:43 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 15:06:56 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/01 23:23:55 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,27 @@ int	get_index(int n, int *stack, int size)
 
 void	count_r(int index, int *stack, int size, t_operations *op)
 {
+	char	c;
 
+	c = 'b';
+	if (index < 0)
+		index *= -1;
+	else
+		c = 'a';
+	if (index < size / 2)
+	{
+		if (c == 'a')
+			op->rra = index + 1;
+		else
+			op->rrb = index + 1;
+	}
+	else
+	{
+		if (c == 'a')
+			op->ra = size - index - 1;
+		else
+			op->rb = size - index - 1;
+	}
 }
 
 t_operations	count_m(int *stack_a, int *stack_b, int size_a, int size_b)
@@ -67,8 +87,20 @@ t_operations	count_m(int *stack_a, int *stack_b, int size_a, int size_b)
 
 void	sort_b(int *stack_a, int *stack_b, int *size_a, int *size_b)
 {
-	int	i;
-	int	m;
+	t_operations	op;
 
-	i = *size_b;
+	op = count_m(stack_a, stack_b, *size_a, *size_b);
+	while (op.ra--)
+		ra(stack_a, *size_a);
+	while (op.rb--)
+		rb(stack_b, *size_b);
+	while (op.rr--)
+		rr(stack_a, stack_b, *size_a, *size_b);
+	while (op.rra--)
+		rra(stack_a, *size_a);
+	while (op.rrb--)
+		rrb(stack_b, *size_b);
+	while (op.rrr--)
+		rrr(stack_a, stack_b, *size_a, *size_b);
+	pa(stack_a, stack_b, size_a, size_b);
 }
