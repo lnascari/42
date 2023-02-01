@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:56:15 by lnascari          #+#    #+#             */
-/*   Updated: 2023/01/18 15:55:15 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:10:01 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static void	s(int *arr, int len)
 
 void	sa(int *a, int len)
 {
-	write(1, "sa\n", 4);
+	write(1, "sa\n", 3);
 	s(a, len);
 }
 
 void	sb(int *b, int len)
 {
 	s(b, len);
-	write(1, "sb\n", 4);
+	write(1, "sb\n", 3);
 }
 
 void	ss(int *a, int *b, int len_a, int len_b)
 {
 	s(a, len_a);
 	s(b, len_b);
-	write(1, "ss\n", 4);
+	write(1, "ss\n", 3);
 }

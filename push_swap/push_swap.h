@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:01:08 by lnascari          #+#    #+#             */
-/*   Updated: 2023/01/31 13:49:53 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:07:45 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,18 @@ void	rrb(int *b, int len);
 void	rrr(int *a, int *b, int len_a, int len_b);
 long	ft_atoi(const char *str);
 void	sort(int *stack_a, int size_a);
+int		min(int *stack, int size);
+int		diff(t_operations min, t_operations op);
+
+typedef struct s_operations
+{
+	int	pa;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+}	t_operations;
 
 #endif

@@ -1,11 +1,11 @@
-FILES = operations_s.c operations_p.c operations_r.c operations_rr.c ft_atoi.c sort.c
+FILES = operations_s.c operations_p.c operations_r.c operations_rr.c ft_atoi.c sort.c complex_sort.c sort_utils.c
 
 OBJ = $(FILES:.c=.o)
 
-NAME = pushswap.a
+NAME = push_swap.a
 
 all: $(NAME)
-	gcc -Wall -Wextra -Werror main.c pushswap.a -o pushswap
+	gcc -Wall -Wextra -Werror main.c push_swap.a -o push_swap
 $(NAME): $(OBJ)
 	ar -crs $(NAME) $?
 %.o: %.c

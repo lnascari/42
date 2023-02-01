@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:47:26 by lnascari          #+#    #+#             */
-/*   Updated: 2023/01/19 12:14:43 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:09:44 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ static void	r_r(int *arr, int len)
 
 void	rra(int *a, int len)
 {
-	write(1, "rra\n", 5);
+	write(1, "rra\n", 4);
 	r_r(a, len);
 }
 
 void	rrb(int *b, int len)
 {
 	r_r(b, len);
-	write(1, "rrb\n", 5);
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(int *a, int *b, int len_a, int len_b)
 {
 	r_r(a, len_a);
 	r_r(b, len_b);
-	write(1, "rrr\n", 5);
+	write(1, "rrr\n", 4);
 }

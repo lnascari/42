@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_p.c                                     :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 15:08:31 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 12:09:02 by lnascari         ###   ########.fr       */
+/*   Created: 2023/02/01 13:41:56 by lnascari          #+#    #+#             */
+/*   Updated: 2023/02/01 15:06:01 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pa(int *a, int *b, int *len_a, int *len_b)
+int	min(int *stack, int size)
 {
-	if (*len_b != 0)
+	int	i;
+	int	min;
+
+	i = 0;
+	min = 0;
+	while (++i < size)
 	{
-		a[*len_a] = b[(*len_b) - 1];
-		*len_a += 1;
-		*len_b -= 1;
+		if (stack[i] < stack[min])
+			min = i;
 	}
-	write(1, "pa\n", 3);
+	return (min);
 }
 
-void	pb(int *a, int *b, int *len_a, int *len_b)
+int	diff(t_operations min, t_operations op)
 {
-	if (*len_a != 0)
-	{
-		b[*len_b] = a[(*len_a) - 1];
-		*len_b += 1;
-		*len_a -= 1;
-	}
-	write(1, "pb\n", 3);
+	int	n1;
+	int	n2;
+
+	n1 = min.ra + min.rb + min.rr + min.rra + min.rrb + min.rrr;
+	n2 = op.ra + op.rb + op.rr + op.rra + op.rrb + op.rrr;
+	return (n2 < n1);
 }
