@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:41:56 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/02 11:58:07 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:50:25 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ void	less_op(t_operations *op)
 	op->pa = 1;
 }
 
+void	ft_bzero(void *s, int n)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = s;
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
+}
+
 void	final_sort(int *stack, int size)
 {
 	int	index;
@@ -69,12 +83,12 @@ void	final_sort(int *stack, int size)
 	{
 		n = index + 1;
 		while (n--)
-			ra(stack, size);
+			rra(stack, size);
 	}
 	else
 	{
 		n = size - index - 1;
 		while (n--)
-			rra(stack, size);
+			ra(stack, size);
 	}
 }

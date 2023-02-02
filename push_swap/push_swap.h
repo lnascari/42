@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:01:08 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/02 11:45:06 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:45:12 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ void	rrr(int *a, int *b, int len_a, int len_b);
 long	ft_atoi(const char *str);
 void	sort(int *stack_a, int size_a);
 void	sort_b(int *stack_a, int *stack_b, int *size_a, int *size_b);
-int		min(int *stack, int size);
-int		diff(t_operations min, t_operations op);
-void	less_op(t_operations *op);
 void	final_sort(int *stack, int size);
+void	ft_bzero(void *s, int n);
+void	less_op(t_operations *op);
+int		diff(t_operations min, t_operations op);
+int		min(int *stack, int size);
 
 #endif

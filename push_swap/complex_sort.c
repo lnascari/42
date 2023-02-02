@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 11:55:43 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/02 11:49:39 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:45:45 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	count_r(int index, int size, t_operations *op, int a)
 
 t_operations	count_m(int *stack_a, int *stack_b, int size_a, int size_b)
 {
-	t_operations	*op;
+	t_operations	op;
 	t_operations	min;
 	int				i;
 	int				index;
@@ -65,14 +65,13 @@ t_operations	count_m(int *stack_a, int *stack_b, int size_a, int size_b)
 	i = size_b;
 	while (--i >= 0)
 	{
-		op = malloc(sizeof(t_operations));
+		ft_bzero(&op, sizeof(t_operations));
 		index = get_index(stack_b[i], stack_a, size_a);
-		count_r(index, size_a, op, 1);
-		count_r(i, size_b, op, 0);
-		less_op(op);
-		if (i == size_b - 1 || diff(min, *op))
-			min = *op;
-		free(op);
+		count_r(index, size_a, &op, 1);
+		count_r(i, size_b, &op, 0);
+		less_op(&op);
+		if (i == size_b - 1 || diff(min, op))
+			min = op;
 	}
 	return (min);
 }
