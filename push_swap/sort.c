@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:19:26 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 23:22:39 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:53:30 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	sort(int *stack_a, int size_a)
 
 	stack_b = malloc(sizeof(int) * size_a);
 	size_b = 0;
+	if (size_a < 10)
+		final_sort(stack_a, size_a);
 	while (size_a > 3)
 		sort_a(stack_a, stack_b, &size_a, &size_b);
 	sort_3(stack_a, &size_a);
