@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:41:56 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 23:20:37 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:58:07 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ void	final_sort(int *stack, int size)
 	int	n;
 
 	index = min(stack, size);
-	if (index > size / 2)
+	if (index < size / 2)
 	{
-		n = size - index;
+		n = index + 1;
 		while (n--)
 			ra(stack, size);
 	}
 	else
 	{
-		n = index;
+		n = size - index - 1;
 		while (n--)
 			rra(stack, size);
 	}

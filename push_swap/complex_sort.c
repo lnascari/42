@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 11:55:43 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 23:23:55 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:49:39 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,18 @@ int	get_index(int n, int *stack, int size)
 	return (min(stack, size));
 }
 
-void	count_r(int index, int *stack, int size, t_operations *op)
+void	count_r(int index, int size, t_operations *op, int a)
 {
-	char	c;
-
-	c = 'b';
-	if (index < 0)
-		index *= -1;
-	else
-		c = 'a';
 	if (index < size / 2)
 	{
-		if (c == 'a')
+		if (a)
 			op->rra = index + 1;
 		else
 			op->rrb = index + 1;
 	}
 	else
 	{
-		if (c == 'a')
+		if (a)
 			op->ra = size - index - 1;
 		else
 			op->rb = size - index - 1;
@@ -67,7 +60,6 @@ t_operations	count_m(int *stack_a, int *stack_b, int size_a, int size_b)
 	t_operations	*op;
 	t_operations	min;
 	int				i;
-	int				r;
 	int				index;
 
 	i = size_b;
@@ -75,10 +67,10 @@ t_operations	count_m(int *stack_a, int *stack_b, int size_a, int size_b)
 	{
 		op = malloc(sizeof(t_operations));
 		index = get_index(stack_b[i], stack_a, size_a);
-		count_r(index, stack_a, size_a, op);
-		count_r(i * -1, stack_b, size_b, op);
+		count_r(index, size_a, op, 1);
+		count_r(i, size_b, op, 0);
 		less_op(op);
-		if (i == size_b - 1 || diff(min, op))
+		if (i == size_b - 1 || diff(min, *op))
 			min = *op;
 		free(op);
 	}

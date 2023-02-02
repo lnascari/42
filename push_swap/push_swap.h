@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:01:08 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 23:21:57 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/02 11:45:06 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 # define PUSH_SWAP_H
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef struct s_operations
+{
+	int	pa;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+}	t_operations;
 
 void	sa(int *a, int len);
 void	sb(int *b, int len);
@@ -33,16 +44,5 @@ int		min(int *stack, int size);
 int		diff(t_operations min, t_operations op);
 void	less_op(t_operations *op);
 void	final_sort(int *stack, int size);
-
-typedef struct s_operations
-{
-	int	pa;
-	int	ra;
-	int	rb;
-	int	rr;
-	int	rra;
-	int	rrb;
-	int	rrr;
-}	t_operations;
 
 #endif
