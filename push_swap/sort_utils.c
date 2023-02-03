@@ -6,25 +6,28 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:41:56 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/02 14:50:25 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:48:43 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	min(int *stack, int size)
+void	count_r(int index, int size, t_operations *op, int a)
 {
-	int	i;
-	int	min;
-
-	i = 0;
-	min = 0;
-	while (++i < size)
+	if (index < size / 2)
 	{
-		if (stack[i] < stack[min])
-			min = i;
+		if (a)
+			op->rra = index + 1;
+		else
+			op->rrb = index + 1;
 	}
-	return (min);
+	else
+	{
+		if (a)
+			op->ra = size - index - 1;
+		else
+			op->rb = size - index - 1;
+	}
 }
 
 int	diff(t_operations min, t_operations op)
@@ -56,7 +59,6 @@ void	less_op(t_operations *op)
 	op->rra -= min_rr;
 	op->rrb -= min_rr;
 	op->rrr = min_rr;
-	op->pa = 1;
 }
 
 void	ft_bzero(void *s, int n)

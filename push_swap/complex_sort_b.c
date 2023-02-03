@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex_sort.c                                     :+:      :+:    :+:   */
+/*   complex_sort_b.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 11:55:43 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/02 14:45:45 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:54:57 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_index(int n, int *stack, int size)
+int	min(int *stack, int size)
+{
+	int	i;
+	int	min;
+
+	i = 0;
+	min = 0;
+	while (++i < size)
+	{
+		if (stack[i] < stack[min])
+			min = i;
+	}
+	return (min);
+}
+
+int	get_index_a(int n, int *stack, int size)
 {
 	int	i;
 	int	index;
@@ -37,25 +52,7 @@ int	get_index(int n, int *stack, int size)
 	return (min(stack, size));
 }
 
-void	count_r(int index, int size, t_operations *op, int a)
-{
-	if (index < size / 2)
-	{
-		if (a)
-			op->rra = index + 1;
-		else
-			op->rrb = index + 1;
-	}
-	else
-	{
-		if (a)
-			op->ra = size - index - 1;
-		else
-			op->rb = size - index - 1;
-	}
-}
-
-t_operations	count_m(int *stack_a, int *stack_b, int size_a, int size_b)
+t_operations	count_m_b(int *stack_a, int *stack_b, int size_a, int size_b)
 {
 	t_operations	op;
 	t_operations	min;
@@ -66,7 +63,7 @@ t_operations	count_m(int *stack_a, int *stack_b, int size_a, int size_b)
 	while (--i >= 0)
 	{
 		ft_bzero(&op, sizeof(t_operations));
-		index = get_index(stack_b[i], stack_a, size_a);
+		index = get_index_a(stack_b[i], stack_a, size_a);
 		count_r(index, size_a, &op, 1);
 		count_r(i, size_b, &op, 0);
 		less_op(&op);
@@ -80,7 +77,7 @@ void	sort_b(int *stack_a, int *stack_b, int *size_a, int *size_b)
 {
 	t_operations	op;
 
-	op = count_m(stack_a, stack_b, *size_a, *size_b);
+	op = count_m_b(stack_a, stack_b, *size_a, *size_b);
 	while (op.ra--)
 		ra(stack_a, *size_a);
 	while (op.rb--)
