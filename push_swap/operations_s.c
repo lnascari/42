@@ -6,13 +6,13 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 14:56:15 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 12:10:01 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:33:37 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	s(int *arr, int len)
+void	s(int *arr, int len)
 {
 	int	x;
 

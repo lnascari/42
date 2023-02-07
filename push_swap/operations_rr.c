@@ -6,13 +6,13 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:47:26 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 12:09:44 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:56:25 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	r_r(int *arr, int len)
+void	r_r(int *arr, int len)
 {
 	int	*tmp;
 	int	i;
@@ -31,6 +31,12 @@ static void	r_r(int *arr, int len)
 	}
 }
 
+void	r_rrr(int *a, int *b, int len_a, int len_b)
+{
+	r_r(a, len_a);
+	r_r(b, len_b);
+}
+
 void	rra(int *a, int len)
 {
 	write(1, "rra\n", 4);
@@ -45,7 +51,6 @@ void	rrb(int *b, int len)
 
 void	rrr(int *a, int *b, int len_a, int len_b)
 {
-	r_r(a, len_a);
-	r_r(b, len_b);
+	r_rrr(a, b, len_a, len_b);
 	write(1, "rrr\n", 4);
 }
