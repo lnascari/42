@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 14:26:14 by lnascari          #+#    #+#             */
-/*   Updated: 2023/01/10 11:53:30 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:44:52 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,5 @@ int	main(int argc, char **argv)
 				window(1, c_re, c_im);
 		}
 	}
-	write(1, HELP, 157);
+	write(1, HELP, 155);
 }
