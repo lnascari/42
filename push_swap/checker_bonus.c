@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 13:29:50 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/07 14:04:59 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/09 12:38:18 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ void	checker(int *stack_a, int size_a)
 	size.size_b = 0;
 	while (cases(stack_a, stack_b, &size, get_next_line(0)))
 		;
-	checker_done(stack_a, stack_b, check_sort(stack_a, size.size_a));
+	if (!size.size_b)
+		checker_done(stack_a, stack_b, check_sort(stack_a, size.size_a));
+	checker_done(stack_a, stack_b, 0);
 }
