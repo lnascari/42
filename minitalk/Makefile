@@ -15,4 +15,6 @@ clean:
 	rm -f ./*.o
 fclean: clean
 	rm -f ./*.a
+	rm server
+	rm client
 re: fclean all

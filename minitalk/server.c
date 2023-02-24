@@ -6,32 +6,31 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 11:54:25 by lnascari          #+#    #+#             */
-/*   Updated: 2023/01/16 16:20:07 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:17:31 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-unsigned char	g_c;
-
 void	handler(int signum, siginfo_t *info, void *context)
 {
 	static int	x;
+	static char	c;
 
 	(void) context;
 	if (signum == SIGUSR2)
-		g_c = g_c | 1;
+		c = c | 1;
 	if (x != 7)
-		g_c = g_c << 1;
+		c = c << 1;
 	x++;
 	if (x == 8)
 	{
 		x = 0;
-		if (g_c != 0)
-			write(1, &g_c, 1);
+		if (c != 0)
+			write(1, &c, 1);
 		else
 			kill(info->si_pid, SIGUSR1);
-		g_c = 0;
+		c = 0;
 	}
 }
 
