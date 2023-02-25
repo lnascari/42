@@ -16,4 +16,6 @@ clean:
 	rm -f ./*.o
 fclean: clean
 	rm -f ./*.a
+	rm -f push_swap
+	rm -f checker
 re: fclean all
