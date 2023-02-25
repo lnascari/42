@@ -16,4 +16,5 @@ clean:
 	rm -f ./*.o
 fclean: clean
 	rm -f fractol.a
+	rm -f fractol
 re: fclean all
