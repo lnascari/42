@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:22:48 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/24 13:49:48 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:48:53 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,25 @@
 
 typedef struct s_info
 {
-	pthread_mutex_t	*lock;
 	int				number_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				forks;
 	int				death;
 	long			time;
 }	t_info;
 
 typedef struct s_philo
 {
-	pthread_t	thread;
-	long		last_meal;
-	int			pos;
-	int			number_of_times_each_philosopher_must_eat;
-	t_info		*info;
+	pthread_mutex_t	rfork;
+	pthread_mutex_t	*lfork;
+	pthread_t		thread;
+	long			last_meal;
+	long			*rlast_meal;
+	long			*llast_meal;
+	int				pos;
+	int				number_of_times_each_philosopher_must_eat;
+	t_info			*info;
 }	t_philo;
 
 int		ft_atoi(const char *str);
