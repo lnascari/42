@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:20:25 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/27 14:41:26 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:29:37 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ void	check_death(t_philo *philo)
 	time = tv.tv_sec * 1000000 + tv.tv_usec - philo->info->time;
 	ltime = *philo->llast_meal + philo->info->time_to_eat * 1000;
 	rtime = *philo->rlast_meal + philo->info->time_to_eat * 1000;
+	maxtime = rtime;
 	if (ltime > rtime)
 		maxtime = ltime;
-	else
-		maxtime = rtime;
 	if (maxtime > time)
 	{
 		if (maxtime > philo->last_meal + philo->info->time_to_die * 1000)
@@ -144,7 +143,7 @@ int	main(int argc, char **argv)
 					- 1].last_meal;
 			else
 				philo[i].rlast_meal = &philo[i - 1].last_meal;
-			philo[i].last_meal = info.time;
+			philo[i].last_meal = 0;
 			philo[i].pos = i + 1;
 			philo[i].info = &info;
 			philo[i].number_of_times_each_philosopher_must_eat = n;
