@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:20:25 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/01 13:00:56 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:18:48 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 	{
 		info.nop = ft_atoi(argv[1]);
-		info.ttd = ft_atoi(argv[2]) + 1;
+		info.ttd = ft_atoi(argv[2]);
 		info.tte = ft_atoi(argv[3]);
 		info.tts = ft_atoi(argv[4]);
 		if (argc == 6)
