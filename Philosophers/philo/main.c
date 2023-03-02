@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:20:25 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/02 11:18:48 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:22:19 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,13 @@ int	get_time(t_philo *philo)
 	return ((tv.tv_sec * 1000000 + tv.tv_usec - philo->info->time) / 1000);
 }
 
-void	sleep_death(t_philo *philo)
-{
-	if (philo->info->tte + philo->info->tts > philo->info->ttd)
-	{
-		usleep((philo->info->ttd - philo->info->tte) * 1000);
-		philo->info->death++;
-		if (philo->info->death == 1)
-			printf ("%d\t%d is dead\n", get_time(philo), philo->pos);
-	}
-}
-
 void	*check_death(void *arg)
 {
 	t_info	*info;
 	int		i;
 
 	info = (t_info *) arg;
-	while (!info->death)
+	while (!info->death && info->nop)
 	{
 		i = -1;
 		while (++i < info->nop)
@@ -46,11 +35,13 @@ void	*check_death(void *arg)
 			{
 				info->death++;
 				if (info->death == 1)
-					printf ("%d\t%d is dead\n", get_time(info->philo),
-						info->philo[i].pos);
+					printf ("%d\t%d is dead\n", get_time(info->philo), i + 1);
 			}
 		}
 	}
+	i = -1;
+	while (++i < info->nop)
+		pthread_detach(info->philo[i].thread);
 	return (0);
 }
 
@@ -77,7 +68,6 @@ void	*routine(void *arg)
 		pthread_mutex_unlock(philo->lfork);
 		if (!philo->info->death)
 			printf("%d\t%d is sleeping\n", get_time(philo), philo->pos);
-		sleep_death(philo);
 		usleep(philo->info->tts * 1000);
 	}
 	return (0);
