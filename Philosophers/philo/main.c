@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:20:25 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/02 12:22:19 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:36:27 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	*check_death(void *arg)
 			if (info->philo[i].last_meal + info->ttd < get_time(info->philo))
 			{
 				info->death++;
-				if (info->death == 1)
+				if (info->philo[i].notepme != -1 && info->death == 1)
 					printf ("%d\t%d is dead\n", get_time(info->philo), i + 1);
 			}
 		}
 	}
 	i = -1;
-	while (++i < info->nop)
+	while (info->philo[++i].notepme != -1 && i < info->nop)
 		pthread_detach(info->philo[i].thread);
 	return (0);
 }
