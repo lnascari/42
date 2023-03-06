@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:22:48 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/01 11:24:46 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:56:16 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ typedef struct s_philo
 }	t_philo;
 
 int		ft_atoi(const char *str);
+void	*routine(void *arg);
+void	*check_death(void *arg);
 
 #endif

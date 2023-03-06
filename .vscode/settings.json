@@ -6,6 +6,7 @@
 		"push_swap_bonus.h": "c",
 		"pthread.h": "c",
 		"stdlib.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"philo.h": "c"
 	}
 }

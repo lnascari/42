@@ -1,4 +1,4 @@
-FILES =  ft_atoi.c
+FILES =  ft_atoi.c routine.c
 
 OBJ = $(FILES:.c=.o)
 
