@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   arg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 16:02:07 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/06 13:57:28 by lnascari         ###   ########.fr       */
+/*   Created: 2023/03/06 13:06:13 by lnascari          #+#    #+#             */
+/*   Updated: 2023/03/06 13:45:18 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap_bonus.h"
+#include "push_swap.h"
 
-void	error(int *arr)
+void	arg_sort_error(int *arr, char **arg)
 {
+	int	i;
+
 	write(2, "Error\n", 7);
 	free(arr);
+	i = -1;
+	while (arg[++i])
+		free(arg[i]);
+	free(arg);
 	exit(0);
 }
 
-int	check(char *str, int *arr)
+int	arg_sort_check(char *str, int *arr, char **arg)
 {
 	long	n;
 	int		i;
@@ -28,15 +34,15 @@ int	check(char *str, int *arr)
 	while (str[++i])
 	{
 		if ((str[i] < '0' || str[i] > '9') && (str[i] != '+' && str[i] != '-'))
-			error(arr);
+			arg_sort_error(arr, arg);
 	}
 	n = ft_atoi(str);
 	if (n > 2147483647 || n < -2147483648)
-		error(arr);
+		arg_sort_error(arr, arg);
 	return ((int) n);
 }
 
-void	duplicates(int *arr, int len)
+void	arg_sort_duplicates(int *arr, int len, char **arg)
 {
 	int	i;
 	int	j;
@@ -48,30 +54,32 @@ void	duplicates(int *arr, int len)
 		while (++j < len)
 		{
 			if (arr[i] == arr[j])
-				error(arr);
+				arg_sort_error(arr, arg);
 		}
 	}
 }
 
-int	main(int argc, char **argv)
+void	arg_sort(char *argv)
 {
-	int	*arr;
-	int	i;
-	int	j;
+	char	**arg;
+	int		*arr;
+	int		len;
+	int		i;
+	int		j;
 
-	if (argc > 1)
-	{
-		if (argc == 2)
-			arg_checker(argv[1]);
-		else
-		{
-			arr = malloc((argc - 1) * sizeof(int));
-			i = argc;
-			j = 0;
-			while (--i > 0)
-				arr[j++] = check(argv[i], arr);
-			duplicates(arr, argc - 1);
-			checker(arr, argc - 1);
-		}
-	}
+	arg = ft_split(argv, ' ');
+	len = 0;
+	while (arg[len])
+		len++;
+	arr = malloc(len * sizeof(int));
+	i = len;
+	j = 0;
+	while (--i >= 0)
+		arr[j++] = arg_sort_check(arg[i], arr, arg);
+	arg_sort_duplicates(arr, len, arg);
+	i = -1;
+	while (arg[++i])
+		free(arg[i]);
+	free(arg);
+	sort(arr, len);
 }

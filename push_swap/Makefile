@@ -1,4 +1,4 @@
-FILES = operations_s.c operations_p.c operations_r.c operations_rr.c ft_atoi.c sort.c complex_sort_a.c complex_sort_b.c sort_utils.c checker_bonus.c get_next_line_bonus.c get_next_line_utils_bonus.c
+FILES = operations_s.c operations_p.c operations_r.c operations_rr.c ft_atoi.c ft_split.c sort.c complex_sort_a.c complex_sort_b.c sort_utils.c arg.c checker_bonus.c get_next_line_bonus.c get_next_line_utils_bonus.c arg_bonus.c
 
 OBJ = $(FILES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 15:01:08 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/03 11:55:40 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:23:54 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	rr(int *a, int *b, int len_a, int len_b);
 void	rra(int *a, int len);
 void	rrb(int *b, int len);
 void	rrr(int *a, int *b, int len_a, int len_b);
+void	arg_sort(char *argv);
 long	ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
 void	sort(int *stack_a, int size_a);
 void	sort_a(int *stack_a, int *stack_b, int *size_a, int *size_b);
 void	sort_b(int *stack_a, int *stack_b, int *size_a, int *size_b);

@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:02:07 by lnascari          #+#    #+#             */
-/*   Updated: 2023/02/01 15:12:06 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:24:56 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,17 @@ int	main(int argc, char **argv)
 
 	if (argc > 1)
 	{
-		arr = malloc((argc - 1) * sizeof(int));
-		i = argc;
-		j = 0;
-		while (--i > 0)
-			arr[j++] = check(argv[i], arr);
-		duplicates(arr, argc - 1);
-		sort(arr, argc - 1);
+		if (argc == 2)
+			arg_sort(argv[1]);
+		else
+		{
+			arr = malloc((argc - 1) * sizeof(int));
+			i = argc;
+			j = 0;
+			while (--i > 0)
+				arr[j++] = check(argv[i], arr);
+			duplicates(arr, argc - 1);
+			sort(arr, argc - 1);
+		}
 	}
 }
