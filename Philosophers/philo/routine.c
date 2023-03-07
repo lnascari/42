@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:55:29 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/06 12:22:36 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:37:23 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	*check_death(void *arg)
 			}
 		}
 	}
+	if (info->nop == 1)
+		pthread_detach(info->philo[0].thread);
 	return (0);
 }
 
