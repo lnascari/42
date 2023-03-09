@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:55:29 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/07 10:37:23 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/03/09 13:53:57 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*check_death(void *arg)
 			{
 				info->death++;
 				if (info->philo[i].notepme != -1 && info->death == 1)
-					printf ("%d\t%d is dead\n", get_time(info->philo), i + 1);
+					printf ("%d\t%d died\n", get_time(info->philo), i + 1);
 			}
 		}
 	}
