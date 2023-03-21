@@ -7,6 +7,9 @@
 		"pthread.h": "c",
 		"stdlib.h": "c",
 		"stdio.h": "c",
-		"philo.h": "c"
+		"philo.h": "c",
+		"minishell.h": "c",
+		"readline.h": "c",
+		"waitstatus.h": "c"
 	}
 }

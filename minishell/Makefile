@@ -1,18 +1,22 @@
-FILES = 
+FILES = \
+	ft_utils.c var_utils.c
 
 OBJ = $(FILES:.c=.o)
 
 NAME = minishell
 
 all: $(NAME)
-	gcc -Wall -Wextra -Werror main.c $(NAME).a -o $(NAME) -lreadline
+		$(MAKE) -C ./libft
+		gcc -Wall -Wextra -Werror main.c $(NAME).a ./libft/libft.a -o $(NAME) -lreadline
 $(NAME): $(OBJ)
-	ar -crs $(NAME).a $?
+		ar -crs $(NAME).a $?
 %.o: %.c
-	gcc -Wall -Wextra -Werror -c $?
+		gcc -Wall -Wextra -Werror -c $?
 clean:
 	rm -f ./*.o
+	$(MAKE) -C ./libft clean
 fclean: clean
+	$(MAKE) -C ./libft fclean
 	rm -f ./*.a
-	rm $(NAME)
+	rm -f $(NAME)
 re: fclean all
