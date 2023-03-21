@@ -263,7 +263,7 @@ void	new_str(char **str, char *value, int start, int end)
 	*str = new;
 }
 
-void	sub_var(char **str, int start)
+void	alnum_var(char **str, int start)
 {
 	int		i;
 	int		end;
@@ -271,10 +271,30 @@ void	sub_var(char **str, int start)
 	t_var	*v;
 
 	i = start + 1;
-	if ((*str)[i] == '?' || (*str)[i] == '_'
-		|| ((*str)[i] >= '0' && (*str)[i] <= '9')
-		|| ((*str)[i] >= 'a' && (*str)[i] <= 'z')
-		|| ((*str)[i] >= 'A' && (*str)[i] <= 'Z'))
+	while ((*str)[i] == '_' || ft_isalnum((*str)[i]))
+		i++;
+	end = i;
+	name = ft_substr(*str, start + 1, end - (start + 1));
+	if (getenv(name))
+		new_str(str, getenv(name), start, end);
+	else
+	{
+		v = ft_varsearch(g_var, name);
+		if (v)
+			new_str(str, v->value, start, end);
+		else
+			new_str(str, "", start, end);
+	}
+	free(name);
+}
+
+void	sub_var(char **str, int start)
+{
+	int		i;
+	t_var	*v;
+
+	i = start + 1;
+	if ((*str)[i] == '?' || (*str)[i] == '_' || ft_isalnum((*str)[i]))
 	{
 		if ((*str)[i] == '?')
 		{
@@ -282,25 +302,7 @@ void	sub_var(char **str, int start)
 			new_str(str, v->value, start, start + 2);
 		}
 		else
-		{
-			while ((*str)[i] == '_' || ((*str)[i] >= '0' && (*str)[i] <= '9')
-				|| ((*str)[i] >= 'a' && (*str)[i] <= 'z')
-				|| ((*str)[i] >= 'A' && (*str)[i] <= 'Z'))
-				i++;
-			end = i;
-			name = ft_substr(*str, start + 1, end - (start + 1));
-			if (getenv(name))
-				new_str(str, getenv(name), start, end);
-			else
-			{
-				v = ft_varsearch(g_var, name);
-				if (v)
-					new_str(str, v->value, start, end);
-				else
-					new_str(str, "", start, end);
-			}
-			free(name);
-		}
+			alnum_var(str, start);
 	}
 }
 
