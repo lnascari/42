@@ -46,6 +46,28 @@ void	space_in_quote(char *str)
 	}
 }
 
+void	check_quote(char *str, int i, int *squote, int *dquote)
+{
+	if (*squote && str[i] == '$')
+		str[i] = 18;
+	if (!(*squote) && str[i] == '"')
+	{
+		*dquote = !(*dquote);
+		if (!(*dquote) && str[i] == '"')
+			str[i] = 127;
+	}
+	if (!(*dquote) && str[i] == '\'')
+	{
+		*squote = !(*squote);
+		if (!(*squote) && str[i] == '\'')
+			str[i] = 127;
+	}
+	if (*dquote && str[i] == '"')
+		str[i] = 127;
+	if (*squote && str[i] == '\'')
+		str[i] = 127;
+}
+
 void	del_quote(char *str)
 {
 	int	i;
@@ -56,26 +78,7 @@ void	del_quote(char *str)
 	squote = 0;
 	dquote = 0;
 	while (str[++i])
-	{
-		if (squote && str[i] == '$')
-			str[i] = 18;
-		if (!squote && str[i] == '"')
-		{
-			dquote = !dquote;
-			if (!dquote && str[i] == '"')
-				str[i] = 127;
-		}
-		if (!dquote && str[i] == '\'')
-		{
-			squote = !squote;
-			if (!squote && str[i] == '\'')
-				str[i] = 127;
-		}
-		if (dquote && str[i] == '"')
-			str[i] = 127;
-		if (squote && str[i] == '\'')
-			str[i] = 127;
-	}
+		check_quote(str, i, &squote, &dquote);
 }
 
 int	count_127(char *s)
