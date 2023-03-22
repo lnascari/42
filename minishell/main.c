@@ -105,7 +105,7 @@ char	*shorten_list(char *s)
 	char	*s2;
 
 	count = count_127(s);
-	s2 = (char *)malloc(ft_strlen(s) - count);
+	s2 = (char *)malloc(ft_strlen(s) - count + 1);
 	i = 0;
 	j = 0;
 	while (s[i])
@@ -156,11 +156,29 @@ void	handler2(int x)
 	(void) x;
 }
 
+void	var_env(char ***env, int i)
+{
+	char		*tmp;
+	t_var		*v;
+
+	v = g_var;
+	while (v)
+	{
+		if (v->export)
+		{
+			tmp = ft_strjoin(v->name, "=");
+			(*env)[i++] = ft_strjoin(tmp, v->value);
+			free(tmp);
+		}
+		v = v->next;
+	}
+	(*env)[i] = 0;
+}
+
 char	**ft_environ(void)
 {
 	extern char	**environ;
 	char		**env;
-	char		*tmp;
 	t_var		*v;
 	int			i;
 
@@ -174,22 +192,11 @@ char	**ft_environ(void)
 			i++;
 		v = v->next;
 	}
-	env = (char **)malloc(i + 1);
+	env = (char **)(malloc((i + 1) * sizeof(char *)));
 	i = -1;
 	while (environ[++i])
 		env[i] = ft_strcpy(environ[i]);
-	v = g_var;
-	while (v)
-	{
-		if (v->export)
-		{
-			tmp = ft_strjoin(v->name, "=");
-			env[i++] = ft_strjoin(tmp, v->value);
-			free(tmp);
-		}
-		v = v->next;
-	}
-	env[i] = 0;
+	var_env(&env, i);
 	return (env);
 }
 
@@ -288,7 +295,7 @@ void	alnum_var(char **str, int start)
 	free(name);
 }
 
-void	sub_var(char **str, int start)
+int	sub_var(char **str, int start)
 {
 	int		i;
 	t_var	*v;
@@ -303,7 +310,9 @@ void	sub_var(char **str, int start)
 		}
 		else
 			alnum_var(str, start);
+		return (1);
 	}
+	return (0);
 }
 
 void	check_var(char **s)
@@ -318,7 +327,10 @@ void	check_var(char **s)
 		while (s[i][j])
 		{
 			if (s[i][j] == '$')
-				sub_var(&s[i], j);
+			{
+				if (sub_var(&s[i], j))
+					j--;
+			}
 			else if (s[i][j] == 18)
 				s[i][j] = '$';
 			j++;
@@ -388,14 +400,34 @@ void	ft_export(char **s)
 	}
 }
 
-void	cases(char **s)
+void	ft_exit(char **s, char *str)
+{
+	int	n;
+
+	n = ft_atoi(g_var->value);
+	if (s)
+	{
+		free(str);
+		if (s[1])
+			n = ft_atoi(s[1]);
+		free_split(s);
+	}
+	ft_varclear(&g_var);
+	rl_clear_history();
+	printf("exit\n");
+	exit(n);
+}
+
+void	cases(char **s, char *str)
 {
 	int	i;
 
 	i = -1;
 	while (s[++i] && var_value(s[i], 0))
 		;
-	if (!ft_strcmp(s[0], "env"))
+	if (!ft_strcmp(s[0], "exit"))
+		ft_exit(s, str);
+	else if (!ft_strcmp(s[0], "env"))
 		ft_env();
 	else if (!ft_strcmp(s[0], "export"))
 		ft_export(s);
@@ -415,12 +447,8 @@ int	main(void)
 	while (1)
 	{
 		str = readline("minishell> ");
-		if (!str || !ft_strcmp(str, "exit"))
-		{
-			printf("exit\n");
-			exit(0);
-		}
-		add_history(str);
+		if (!str)
+			ft_exit(0, 0);
 		if (str[0])
 		{
 			space_in_quote(str);
@@ -428,9 +456,10 @@ int	main(void)
 			s = ft_split(str, ' ');
 			spaces(s);
 			check_var(s);
-			cases(s);
+			cases(s, str);
 			free_split(s);
+			add_history(str);
+			free(str);
 		}
-		free(str);
 	}
 }
