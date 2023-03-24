@@ -10,6 +10,7 @@
 		"philo.h": "c",
 		"minishell.h": "c",
 		"readline.h": "c",
-		"waitstatus.h": "c"
+		"waitstatus.h": "c",
+		"termios-c_iflag.h": "c"
 	}
 }

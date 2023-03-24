@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:07:55 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/03/20 13:31:55 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/03/23 14:31:32 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,26 @@ void	ft_varclear(t_var **var)
 	}
 }
 
-void	ft_vardelone(t_var *var)
+void	ft_vardelone(t_var **var, t_var *v)
 {
-	if (var != 0)
+	t_var	*next;
+	t_var	*tmp;
+
+	if (v != 0)
 	{
-		free(var->name);
-		free(var->value);
-		free(var);
+		tmp = *var;
+		next = v->next;
+		if ((*var) == v)
+			*var = (*var)->next;
+		else
+		{
+			while (tmp->next != v)
+				tmp = tmp->next;
+			tmp->next = next;
+		}
+		free(v->name);
+		free(v->value);
+		free(v);
 	}
 }
 

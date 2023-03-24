@@ -1,55 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 11:29:23 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/03/24 11:36:30 by gpaoline         ###   ########.fr       */
+/*   Created: 2023/03/24 11:36:58 by gpaoline          #+#    #+#             */
+/*   Updated: 2023/03/24 11:37:48 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	handler_int(int x)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i])
-	{
-		if (s1[i] == 0 && s2[i] == 0)
-		{
-			return (0);
-		}
-		i++;
-	}
-	return (s1[i] - s2[i]);
+	(void) x;
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
-char	*ft_strcpy(char *src)
+void	handler_quit(int x)
 {
-	int		i;
-	char	*dest;
-
-	dest = malloc(ft_strlen(src) + 1);
-	i = 0;
-	while (src[i] != 0)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = 0;
-	return (dest);
-}
-
-void	ft_free_split(char **s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-		free(s[i]);
-	free(s);
+	(void) x;
 }

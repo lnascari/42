@@ -1,55 +1,74 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   spaces.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 11:29:23 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/03/24 11:36:30 by gpaoline         ###   ########.fr       */
+/*   Created: 2023/03/24 11:17:03 by gpaoline          #+#    #+#             */
+/*   Updated: 2023/03/24 11:20:31 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strcmp(char *s1, char *s2)
+int	count_127(char *s)
 {
 	int	i;
+	int	count;
 
+	count = 0;
 	i = 0;
-	while (s1[i] == s2[i])
+	while (s[i])
 	{
-		if (s1[i] == 0 && s2[i] == 0)
-		{
-			return (0);
-		}
+		if (s[i] == 127)
+			count++;
 		i++;
 	}
-	return (s1[i] - s2[i]);
+	return (count);
 }
 
-char	*ft_strcpy(char *src)
+char	*shorten_list(char *s)
 {
 	int		i;
-	char	*dest;
+	int		j;
+	int		count;
+	char	*s2;
 
-	dest = malloc(ft_strlen(src) + 1);
+	count = count_127(s);
+	s2 = (char *)malloc(ft_strlen(s) - count + 1);
 	i = 0;
-	while (src[i] != 0)
+	j = 0;
+	while (s[i])
 	{
-		dest[i] = src[i];
-		i++;
+		if (s[i] == 127)
+			i++;
+		else
+		{
+			s2[j] = s[i];
+			i++;
+			j++;
+		}
 	}
-	dest[i] = 0;
-	return (dest);
+	s2[j] = 0;
+	free(s);
+	return (s2);
 }
 
-void	ft_free_split(char **s)
+void	spaces(char **s)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (s[++i])
-		free(s[i]);
-	free(s);
+	{
+		j = -1;
+		while (s[i][++j])
+		{
+			if (s[i][j] == 17)
+				s[i][j] = ' ';
+		}
+		s[i] = shorten_list(s[i]);
+	}
 }

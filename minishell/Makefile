@@ -1,5 +1,6 @@
 FILES = \
-	ft_utils.c var_utils.c
+	ft_utils.c var_utils.c commands.c handlers.c programs.c quotes.c spaces.c \
+	var.c
 
 OBJ = $(FILES:.c=.o)
 
