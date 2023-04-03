@@ -20,12 +20,22 @@ int	get_time(t_philo *philo)
 	return ((tv.tv_sec * 1000000 + tv.tv_usec - philo->info->time) / 1000);
 }
 
+void	print_msg(int time, int n, char *msg, t_info *info)
+{
+	pthread_mutex_lock(&info->dmutex);
+	if (!info->death)
+		printf ("%d\t%d %s\n", time, n, msg);
+	pthread_mutex_unlock(&info->dmutex);
+}
+
 void	*check_death(void *arg)
 {
 	t_info	*info;
 	int		i;
 
 	info = (t_info *) arg;
+	if (info->nop == 1)
+		printf("0\t1 has taken a fork\n");
 	while (!info->death && info->nop)
 	{
 		i = -1;
@@ -33,14 +43,14 @@ void	*check_death(void *arg)
 		{
 			if (info->philo[i].last_meal + info->ttd < get_time(info->philo))
 			{
+				pthread_mutex_lock(&info->dmutex);
 				info->death++;
 				if (info->philo[i].notepme != -1 && info->death == 1)
 					printf ("%d\t%d died\n", get_time(info->philo), i + 1);
+				pthread_mutex_unlock(&info->dmutex);
 			}
 		}
 	}
-	if (info->nop == 1)
-		pthread_detach(info->philo[0].thread);
 	return (0);
 }
 
@@ -49,24 +59,19 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
-	while (philo->notepme-- && !philo->info->death)
+	while (philo->notepme-- && !philo->info->death && philo->info->nop != 1)
 	{
-		if (!philo->info->death)
-			printf ("%d\t%d is thinking\n", get_time(philo), philo->pos);
+		print_msg(get_time(philo), philo->pos, "is thinking", philo->info);
 		pthread_mutex_lock(&philo->rfork);
-		if (!philo->info->death)
-			printf ("%d\t%d has taken a fork\n", get_time(philo), philo->pos);
+		print_msg(get_time(philo), philo->pos, "has taken a fork", philo->info);
 		pthread_mutex_lock(philo->lfork);
-		if (!philo->info->death)
-			printf ("%d\t%d has taken a fork\n", get_time(philo), philo->pos);
+		print_msg(get_time(philo), philo->pos, "has taken a fork", philo->info);
 		philo->last_meal = get_time(philo);
-		if (!philo->info->death)
-			printf ("%d\t%d is eating\n", philo->last_meal, philo->pos);
+		print_msg(get_time(philo), philo->pos, "is eating", philo->info);
 		usleep(philo->info->tte * 1000);
 		pthread_mutex_unlock(&philo->rfork);
 		pthread_mutex_unlock(philo->lfork);
-		if (!philo->info->death)
-			printf("%d\t%d is sleeping\n", get_time(philo), philo->pos);
+		print_msg(get_time(philo), philo->pos, "is sleeping", philo->info);
 		usleep(philo->info->tts * 1000);
 	}
 	return (0);

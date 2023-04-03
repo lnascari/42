@@ -36,6 +36,7 @@ void	threads(t_info *info)
 	int	i;
 
 	pthread_create(&info->dthread, 0, &check_death, info);
+	pthread_mutex_init(&info->dmutex, 0);
 	i = 0;
 	while (i < info->nop)
 	{

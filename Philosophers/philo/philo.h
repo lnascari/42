@@ -20,6 +20,7 @@
 
 typedef struct s_info
 {
+	pthread_mutex_t	dmutex;
 	pthread_t		dthread;
 	int				nop;
 	int				ttd;
