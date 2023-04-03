@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:55:29 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/09 13:53:57 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:35:52 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ int	get_time(t_philo *philo)
 	return ((tv.tv_sec * 1000000 + tv.tv_usec - philo->info->time) / 1000);
 }
 
-void	print_msg(int time, int n, char *msg, t_info *info)
+int	is_dead(t_info *info)
 {
+	int	bool;
+
 	pthread_mutex_lock(&info->dmutex);
-	if (!info->death)
-		printf ("%d\t%d %s\n", time, n, msg);
+	if (info->death)
+		bool = 1;
+	else
+		bool = 0;
 	pthread_mutex_unlock(&info->dmutex);
+	return (bool);
 }
 
 void	*check_death(void *arg)
@@ -35,8 +40,8 @@ void	*check_death(void *arg)
 
 	info = (t_info *) arg;
 	if (info->nop == 1)
-		printf("0\t1 has taken a fork\n");
-	while (!info->death && info->nop)
+		printf ("0\t1 has taken a fork\n");
+	while (info->nop)
 	{
 		i = -1;
 		while (++i < info->nop)
@@ -45,9 +50,10 @@ void	*check_death(void *arg)
 			{
 				pthread_mutex_lock(&info->dmutex);
 				info->death++;
-				if (info->philo[i].notepme != -1 && info->death == 1)
+				if (info->philo[i].notepme != -1)
 					printf ("%d\t%d died\n", get_time(info->philo), i + 1);
 				pthread_mutex_unlock(&info->dmutex);
+				return (0);
 			}
 		}
 	}
@@ -59,19 +65,24 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
-	while (philo->notepme-- && !philo->info->death && philo->info->nop != 1)
+	while (philo->notepme-- && philo->info->nop != 1 && !is_dead(philo->info))
 	{
-		print_msg(get_time(philo), philo->pos, "is thinking", philo->info);
+		if (!is_dead(philo->info))
+			printf ("%d\t%d is thinking\n", get_time(philo), philo->pos);
 		pthread_mutex_lock(&philo->rfork);
-		print_msg(get_time(philo), philo->pos, "has taken a fork", philo->info);
+		if (!is_dead(philo->info))
+			printf ("%d\t%d has taken a fork\n", get_time(philo), philo->pos);
 		pthread_mutex_lock(philo->lfork);
-		print_msg(get_time(philo), philo->pos, "has taken a fork", philo->info);
+		if (!is_dead(philo->info))
+			printf ("%d\t%d has taken a fork\n", get_time(philo), philo->pos);
 		philo->last_meal = get_time(philo);
-		print_msg(get_time(philo), philo->pos, "is eating", philo->info);
+		if (!is_dead(philo->info))
+			printf ("%d\t%d is eating\n", get_time(philo), philo->pos);
 		usleep(philo->info->tte * 1000);
 		pthread_mutex_unlock(&philo->rfork);
 		pthread_mutex_unlock(philo->lfork);
-		print_msg(get_time(philo), philo->pos, "is sleeping", philo->info);
+		if (!is_dead(philo->info))
+			printf ("%d\t%d is sleeping\n", get_time(philo), philo->pos);
 		usleep(philo->info->tts * 1000);
 	}
 	return (0);
