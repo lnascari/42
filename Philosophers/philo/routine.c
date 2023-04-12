@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:55:29 by lnascari          #+#    #+#             */
-/*   Updated: 2023/04/03 12:35:52 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/04/12 11:31:46 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,34 @@ int	get_time(t_philo *philo)
 
 	gettimeofday(&tv, 0);
 	return ((tv.tv_sec * 1000000 + tv.tv_usec - philo->info->time) / 1000);
+}
+
+int	get_set(t_philo *philo, int set, int last_meal)
+{
+	int	value;
+
+	value = 0;
+	if (last_meal)
+	{
+		pthread_mutex_lock(&philo->lmmutex);
+		if (set)
+			philo->last_meal = get_time(philo);
+		else
+			value = philo->last_meal;
+		pthread_mutex_unlock(&philo->lmmutex);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->notepmemutex);
+		value = philo->notepme;
+		if (set)
+		{
+			philo->notepme--;
+			value++;
+		}
+		pthread_mutex_unlock(&philo->notepmemutex);
+	}
+	return (value);
 }
 
 int	is_dead(t_info *info)
@@ -46,11 +74,11 @@ void	*check_death(void *arg)
 		i = -1;
 		while (++i < info->nop)
 		{
-			if (info->philo[i].last_meal + info->ttd < get_time(info->philo))
+			if (get_set(&info->philo[i], 0, 1) + info->ttd < get_time(info->philo))
 			{
 				pthread_mutex_lock(&info->dmutex);
 				info->death++;
-				if (info->philo[i].notepme != -1)
+				if (get_set(&info->philo[i], 0, 0) != -1)
 					printf ("%d\t%d died\n", get_time(info->philo), i + 1);
 				pthread_mutex_unlock(&info->dmutex);
 				return (0);
@@ -75,7 +103,7 @@ void	*routine(void *arg)
 		pthread_mutex_lock(philo->lfork);
 		if (!is_dead(philo->info))
 			printf ("%d\t%d has taken a fork\n", get_time(philo), philo->pos);
-		philo->last_meal = get_time(philo);
+		get_set(philo, 1, 1);
 		if (!is_dead(philo->info))
 			printf ("%d\t%d is eating\n", get_time(philo), philo->pos);
 		usleep(philo->info->tte * 1000);

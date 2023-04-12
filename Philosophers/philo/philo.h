@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:22:48 by lnascari          #+#    #+#             */
-/*   Updated: 2023/03/06 11:56:16 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/04/12 11:08:13 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_info
 
 typedef struct s_philo
 {
+	pthread_mutex_t	notepmemutex;
+	pthread_mutex_t	lmmutex;
 	pthread_mutex_t	rfork;
 	pthread_mutex_t	*lfork;
 	pthread_t		thread;

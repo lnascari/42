@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 12:20:25 by lnascari          #+#    #+#             */
-/*   Updated: 2023/04/03 12:43:57 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/04/12 11:15:52 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	data(t_info *info, int n)
 	while (++i < info->nop)
 	{
 		pthread_mutex_init(&info->philo[i].rfork, 0);
+		pthread_mutex_init(&info->philo[i].lmmutex, 0);
+		pthread_mutex_init(&info->philo[i].notepmemutex, 0);
 		if (i == info->nop - 1)
 			info->philo[i].lfork = &info->philo[0].rfork;
 		else
