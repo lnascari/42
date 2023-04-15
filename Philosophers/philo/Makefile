@@ -5,11 +5,11 @@ OBJ = $(FILES:.c=.o)
 NAME = philo
 
 all: $(NAME)
-	gcc -Wall -Wextra -Werror main.c $(NAME).a -o $(NAME) -pthread
+	cc -Wall -Wextra -Werror main.c $(NAME).a -o $(NAME) -pthread
 $(NAME): $(OBJ)
 	ar -crs $(NAME).a $?
 %.o: %.c
-	gcc -Wall -Wextra -Werror -c $?
+	cc -Wall -Wextra -Werror -c $?
 clean:
 	rm -f ./*.o
 fclean: clean

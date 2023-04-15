@@ -28,10 +28,9 @@ int	get_set(t_philo *philo, int set, int last_meal)
 	if (last_meal)
 	{
 		pthread_mutex_lock(&philo->lmmutex);
+		value = philo->last_meal;
 		if (set)
 			philo->last_meal = get_time(philo);
-		else
-			value = philo->last_meal;
 		pthread_mutex_unlock(&philo->lmmutex);
 	}
 	else
@@ -39,10 +38,7 @@ int	get_set(t_philo *philo, int set, int last_meal)
 		pthread_mutex_lock(&philo->notepmemutex);
 		value = philo->notepme;
 		if (set)
-		{
 			philo->notepme--;
-			value++;
-		}
 		pthread_mutex_unlock(&philo->notepmemutex);
 	}
 	return (value);
@@ -93,10 +89,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
-	while (philo->notepme-- && philo->info->nop != 1 && !is_dead(philo->info))
+	while (get_set(philo, 1, 0) && philo->info->nop != 1 && !is_dead(philo->info))
 	{
-		if (!is_dead(philo->info))
-			printf ("%d\t%d is thinking\n", get_time(philo), philo->pos);
 		pthread_mutex_lock(&philo->rfork);
 		if (!is_dead(philo->info))
 			printf ("%d\t%d has taken a fork\n", get_time(philo), philo->pos);
@@ -112,6 +106,8 @@ void	*routine(void *arg)
 		if (!is_dead(philo->info))
 			printf ("%d\t%d is sleeping\n", get_time(philo), philo->pos);
 		usleep(philo->info->tts * 1000);
+		if (!is_dead(philo->info))
+			printf ("%d\t%d is thinking\n", get_time(philo), philo->pos);
 	}
 	return (0);
 }
