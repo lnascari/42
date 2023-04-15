@@ -70,7 +70,8 @@ void	*check_death(void *arg)
 		i = -1;
 		while (++i < info->nop)
 		{
-			if (get_set(&info->philo[i], 0, 1) + info->ttd < get_time(info->philo))
+			if (get_set(&info->philo[i], 0, 1)
+				+ info->ttd < get_time(info->philo))
 			{
 				pthread_mutex_lock(&info->dmutex);
 				info->death++;
@@ -89,7 +90,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
-	while (get_set(philo, 1, 0) && philo->info->nop != 1 && !is_dead(philo->info))
+	while (get_set(philo, 1, 0) && philo->info->nop != 1
+		&& !is_dead(philo->info))
 	{
 		pthread_mutex_lock(&philo->rfork);
 		if (!is_dead(philo->info))

@@ -65,7 +65,6 @@ int	sub_var(char **str, int start)
 	extern t_var	*g_var;
 	t_var			*v;
 	int				i;
-	
 
 	i = start + 1;
 	if ((*str)[i] == '?' || (*str)[i] == '_' || ft_isalnum((*str)[i]))

@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:29:16 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/03/24 11:37:23 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/06 13:34:20 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	var_env(char ***env, int i)
 {
-	extern t_var	*g_var;
-	char			*tmp;
-	t_var			*v;
+	char	*tmp;
+	t_var	*v;
 
 	v = g_var;
 	while (v)
@@ -34,11 +33,10 @@ void	var_env(char ***env, int i)
 
 char	**ft_environ(void)
 {
-	extern t_var	*g_var;
-	extern char		**environ;
-	char			**env;
-	t_var			*v;
-	int				i;
+	extern char	**environ;
+	char		**env;
+	t_var		*v;
+	int			i;
 
 	i = 0;
 	v = g_var;
@@ -58,22 +56,24 @@ char	**ft_environ(void)
 	return (env);
 }
 
-int	exe_path(char **s, char **p, int i)
+int	exe_path(char **s, char **p, int i, int exe)
 {
-	extern t_var	*g_var;
-	char			*pa;
-	char			*temp;
-	int				stat;
+	char	*pa;
+	char	*temp;
+	int		stat;
 
 	temp = ft_strjoin(p[i], "/");
 	pa = ft_strjoin(temp, s[0]);
 	free(temp);
 	if (!access(pa, X_OK))
 	{
-		if (!fork())
-			execve(pa, s, ft_environ());
-		waitpid(-1, &stat, 0);
-		ft_varedit(&g_var, ft_strcpy("?"), ft_itoa(WEXITSTATUS(stat)), 0);
+		if (exe)
+		{
+			if (!fork())
+				execve(pa, s, ft_environ());
+			waitpid(-1, &stat, 0);
+			ft_varedit(&g_var, ft_strcpy("?"), ft_itoa(WEXITSTATUS(stat)), 0);
+		}
 		free(pa);
 		return (1);
 	}
@@ -81,29 +81,46 @@ int	exe_path(char **s, char **p, int i)
 	return (0);
 }
 
-void	programs(char **s)
+int	exe_local(char **s, int exe)
 {
-	extern t_var	*g_var;
-	char			**p;
-	int				stat;
-	int				i;
+	int	stat;
 
 	if (!access(s[0], X_OK))
 	{
-		if (!fork())
-			execve(s[0], s, ft_environ());
-		waitpid(-1, &stat, 0);
-		ft_varedit(&g_var, ft_strcpy("?"), ft_itoa(WEXITSTATUS(stat)), 0);
+		if (exe)
+		{
+			if (!fork())
+				execve(s[0], s, ft_environ());
+			waitpid(-1, &stat, 0);
+			ft_varedit(&g_var, ft_strcpy("?"), ft_itoa(WEXITSTATUS(stat)), 0);
+		}
+		return (1);
 	}
-	else
+	return (0);
+}
+
+int	programs(char **s, int exe)
+{
+	char	**p;
+	int		i;
+	int		r;
+
+	signal(SIGINT, handler_int_programs);
+	r = exe_local(s, exe);
+	if (!r)
 	{
 		p = ft_split(getenv("PATH"), ':');
 		i = -1;
 		while (p[++i])
 		{
-			if (exe_path(s, p, i))
+			if (exe_path(s, p, i, exe))
+			{
+				r = 1;
 				break ;
+			}
 		}
-		ft_free_split(p);
+		ft_free_split(p, 1);
 	}
+	signal(SIGINT, handler_int);
+	return (r);
 }

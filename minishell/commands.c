@@ -76,7 +76,7 @@ void	ft_exit(char **s, char *str)
 		free(str);
 		if (s[1])
 			n = ft_atoi(s[1]);
-		ft_free_split(s);
+		ft_free_split(s, 1);
 	}
 	ft_varclear(&g_var);
 	rl_clear_history();
@@ -91,12 +91,12 @@ void	ft_cd(char **s)
 		if (!ft_strcmp(s[1], "-"))
 		{
 			if (chdir(getenv("OLDPWD")))
-				printf("Error\n");
+				perror("Error");
 			else
 				printf("%s\n", getenv("OLDPWD"));
 		}
 		else if (chdir(s[1]))
-			printf("Error\n");
+			perror("Error");
 	}
 	else
 		chdir(getenv("HOME"));

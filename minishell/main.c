@@ -6,31 +6,77 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:21:22 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/03/24 11:36:57 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:22:52 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cases(char **s, char *str)
+t_var	*g_var;
+
+void	ft_error(int *error, char *s, int p)
+{
+	if (!error || !*error)
+	{
+		if (p)
+		{
+			write(2, s, ft_strlen(s));
+			write(2, ": command not found\n", 20);
+		}
+		else
+		{
+			write(2, "Error: ", 7);
+			perror(s);
+		}
+		if (error)
+			*error = 1;
+	}
+}
+
+int	cases_control(char **s)
+{
+	int	r;
+
+	r = 1;
+	if (!ft_strcmp(s[0], "exit"))
+		;
+	else if (!ft_strcmp(s[0], "env"))
+		;
+	else if (!ft_strcmp(s[0], "export"))
+		;
+	else if (!ft_strcmp(s[0], "unset"))
+		;
+	else if (!ft_strcmp(s[0], "cd"))
+		;
+	else
+		r = programs(s, 0);
+	return (r);
+}
+
+int	cases(char **s, char *str)
 {
 	int	i;
+	int	r;
+	int	b;
 
+	b = 1;
+	r = 1;
 	i = -1;
 	while (s[++i] && var_value(s[i], 0))
-		;
-	if (!ft_strcmp(s[0], "exit"))
+		b = 0;
+	if (b && !ft_strcmp(s[0], "exit"))
 		ft_exit(s, str);
-	else if (!ft_strcmp(s[0], "env"))
+	else if (b && !ft_strcmp(s[0], "env"))
 		ft_env();
-	else if (!ft_strcmp(s[0], "export"))
+	else if (b && !ft_strcmp(s[0], "export"))
 		ft_export(s);
-	else if (!ft_strcmp(s[0], "unset"))
+	else if (b && !ft_strcmp(s[0], "unset"))
 		ft_unset(s);
-	else if (!ft_strcmp(s[0], "cd"))
+	else if (b && !ft_strcmp(s[0], "cd"))
 		ft_cd(s);
-	else
-		programs(s);
+	else if (b)
+		r = programs(s, 1);
+	return (r);
 }
 
 void	routine(char *str)
@@ -42,8 +88,14 @@ void	routine(char *str)
 	s = ft_split(str, ' ');
 	spaces(s);
 	check_var(s);
-	cases(s, str);
-	ft_free_split(s);
+	if (!op_pipe_check(s))
+	{
+		if (!cases(s, str))
+			ft_error(0, s[0], 1);
+		ft_free_split(s, 1);
+	}
+	else
+		orders_arr(s, str);
 	add_history(str);
 	free(str);
 }

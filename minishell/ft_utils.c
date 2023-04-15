@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:29:23 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/03/24 11:36:30 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/12 11:46:57 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,37 @@ char	*ft_strcpy(char *src)
 	return (dest);
 }
 
-void	ft_free_split(char **s)
+void	ft_free_split(char **s, int all)
 {
 	int	i;
 
 	i = -1;
 	while (s[++i])
 		free(s[i]);
-	free(s);
+	if (all)
+		free(s);
+}
+
+void	ft_free_struct(t_red *orders, int pipes)
+{
+	int	i;
+
+	i = -1;
+	while (++i < pipes + 1)
+	{
+		free(orders[i].input_file);
+		free(orders[i].output_file);
+		if (orders[i].s)
+			ft_free_split(orders[i].s, 1);
+	}
+	free(orders);
+}
+
+void	ft_free_and_exit(t_red *orders, char *str, int pipes)
+{
+	ft_free_struct(orders, pipes);
+	free(str);
+	ft_varclear(&g_var);
+	rl_clear_history();
+	exit(0);
 }
