@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 11:55:29 by lnascari          #+#    #+#             */
-/*   Updated: 2023/04/12 11:31:46 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:12:12 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	*routine(void *arg)
 		if (!is_dead(philo->info))
 			printf ("%d\t%d is sleeping\n", get_time(philo), philo->pos);
 		usleep(philo->info->tts * 1000);
-		if (!is_dead(philo->info))
+		if (!is_dead(philo->info) && get_set(philo, 0, 0))
 			printf ("%d\t%d is thinking\n", get_time(philo), philo->pos);
 	}
 	return (0);
