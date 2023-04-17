@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:47:06 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/14 12:25:48 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/17 13:20:24 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_var
 
 typedef struct s_red
 {
+	int		s_in;
+	int		s_out;
 	int		input;
 	char	*input_file;
 	int		output;

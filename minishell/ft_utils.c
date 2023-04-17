@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:29:23 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/12 11:46:57 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/17 13:28:14 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	ft_free_struct(t_red *orders, int pipes)
 	i = -1;
 	while (++i < pipes + 1)
 	{
+		close(orders[i].s_in);
+		close(orders[i].s_out);
 		free(orders[i].input_file);
 		free(orders[i].output_file);
 		if (orders[i].s)

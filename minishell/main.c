@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:21:22 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/14 12:22:52 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/17 13:33:52 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	routine(char *str)
 {
 	char	**s;
 
+	add_history(str);
 	space_in_quote(str);
 	del_quote(str);
 	s = ft_split(str, ' ');
@@ -96,7 +97,6 @@ void	routine(char *str)
 	}
 	else
 		orders_arr(s, str);
-	add_history(str);
 	free(str);
 }
 

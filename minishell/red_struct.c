@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:22:34 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/14 12:22:54 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/17 13:21:34 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	red_struct_init(t_red *order)
 	order->output = 0;
 	order->output_file = 0;
 	order->s = 0;
+	order->s_in = dup(0);
+	order->s_out = dup(1);
 }
 
 int	struct_error(t_red *orders, int pipes)
