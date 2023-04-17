@@ -1,6 +1,6 @@
 FILES = \
 	ft_utils.c var_utils.c commands.c handlers.c programs.c quotes.c spaces.c \
-	var.c operators.c pipe.c red_struct.c redirections.c
+	var.c operators.c pipe.c red_struct.c redirections.c op_pipe.c
 
 OBJ = $(FILES:.c=.o)
 

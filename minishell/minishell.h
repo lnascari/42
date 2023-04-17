@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:47:06 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/17 13:20:24 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/17 14:23:59 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ void	handler_quit(int x);
 
 void	exec_op(t_red *orders, int pipes, char *str);
 
-int		op_pipe_check(char **s);
 void	open_and_exec(t_red orders);
+
+int		op_pipe_check(char **s);
+int		op_pipe_error(char **s);
 
 int		operators(char *str);
 void	redirections(char **s, t_red *order);

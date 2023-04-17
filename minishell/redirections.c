@@ -6,15 +6,35 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:14:01 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/17 13:26:57 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/17 14:20:11 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	open_input(int *fdi, t_red orders)
+void	heredoc(int fdi, t_red orders)
 {
 	char	*str;
+
+	while (1)
+	{
+		str = readline("> ");
+		if (!str)
+		{
+			printf("\n");
+			continue ;
+		}
+		if (!ft_strcmp(str, orders.input_file))
+			break ;
+		write(fdi, str, ft_strlen(str));
+		write(fdi, "\n", 1);
+		free(str);
+	}
+	free(str);
+}
+
+void	open_input(int *fdi, t_red orders)
+{
 	int		stdout_backup;
 
 	if (orders.input == 2)
@@ -23,21 +43,7 @@ void	open_input(int *fdi, t_red orders)
 		stdout_backup = dup(1);
 		dup2(orders.s_in, 0);
 		dup2(orders.s_out, 1);
-		while (1)
-		{
-			str = readline("> ");
-			if (!str)
-			{
-				printf("\n");
-				continue ;
-			}
-			if (!ft_strcmp(str, orders.input_file))
-				break ;
-			write(*fdi, str, ft_strlen(str));
-			write(*fdi, "\n", 1);
-			free(str);
-		}
-		free(str);
+		heredoc(*fdi, orders);
 		close(*fdi);
 		dup2(stdout_backup, 1);
 		close(stdout_backup);
@@ -98,17 +104,4 @@ void	open_and_exec(t_red orders)
 		stdout_backup = 0;
 	programs(orders.s, 1);
 	close_io(fdi, fdo, stdin_backup, stdout_backup);
-}
-
-int	op_pipe_check(char **s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-	{
-		if (operators(s[i]) || !ft_strcmp(s[i], "|"))
-			return (1);
-	}
-	return (0);
 }
