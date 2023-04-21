@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:29:16 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/06 13:34:20 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:22:04 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	exe_path(char **s, char **p, int i, int exe)
 	temp = ft_strjoin(p[i], "/");
 	pa = ft_strjoin(temp, s[0]);
 	free(temp);
-	if (!access(pa, X_OK))
+	if (!access(pa, X_OK) && !is_directory(pa))
 	{
 		if (exe)
 		{
@@ -85,7 +85,7 @@ int	exe_local(char **s, int exe)
 {
 	int	stat;
 
-	if (!access(s[0], X_OK))
+	if (!access(s[0], X_OK) && !is_directory(s[0]))
 	{
 		if (exe)
 		{

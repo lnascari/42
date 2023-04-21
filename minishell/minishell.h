@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:47:06 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/17 14:23:59 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:07:16 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	exec_op(t_red *orders, int pipes, char *str);
 
 void	open_and_exec(t_red orders);
 
+int		all_spaces(char *str);
+int		is_directory(char *s);
 int		op_pipe_check(char **s);
 int		op_pipe_error(char **s);
 

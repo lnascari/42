@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:21:22 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/17 14:22:08 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:08:49 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ int	main(void)
 		str = readline("minishell> ");
 		if (!str)
 			ft_exit(0, 0);
+		if (all_spaces(str))
+			continue ;
 		if (str[0])
 			routine(str);
 	}

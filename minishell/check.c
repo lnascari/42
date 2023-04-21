@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_pipe.c                                          :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:01:00 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/17 14:24:13 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:12:48 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,28 @@ int	op_pipe_error(char **s)
 	if (operators(s[i]) || !ft_strcmp(s[i], "|"))
 		return (1);
 	return (0);
+}
+
+int	is_directory(char *s)
+{
+	struct stat	buf;
+
+	stat(s, &buf);
+	if (!s[0])
+		return (1);
+	return (S_ISDIR(buf.st_mode));
+}
+
+int	all_spaces(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] != ' ')
+			return (0);
+	}
+	free (str);
+	return (1);
 }

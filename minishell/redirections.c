@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:14:01 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/17 14:20:11 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:37:03 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ void	heredoc(int fdi, t_red orders)
 	while (1)
 	{
 		str = readline("> ");
-		if (!str)
-		{
-			printf("\n");
-			continue ;
-		}
-		if (!ft_strcmp(str, orders.input_file))
+		if (!str || !ft_strcmp(str, orders.input_file))
 			break ;
 		write(fdi, str, ft_strlen(str));
 		write(fdi, "\n", 1);
