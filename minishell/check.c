@@ -6,7 +6,11 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:01:00 by gpaoline          #+#    #+#             */
+<<<<<<< HEAD:minishell/check.c
 /*   Updated: 2023/05/02 13:35:03 by gpaoline         ###   ########.fr       */
+=======
+/*   Updated: 2023/04/21 11:12:48 by gpaoline         ###   ########.fr       */
+>>>>>>> e5fc907b233d9c0130db5a929ee377f265cb5164:minishell/op_pipe.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +70,7 @@ int	all_spaces(char *str)
 	free (str);
 	return (1);
 }
+<<<<<<< HEAD:minishell/check.c
 
 void	no_op_case(char **s, char *str)
 {
@@ -74,3 +79,5 @@ void	no_op_case(char **s, char *str)
 		ft_error(0, s[0], 1);
 	ft_free_split(s, 1);
 }
+=======
+>>>>>>> e5fc907b233d9c0130db5a929ee377f265cb5164:minishell/op_pipe.c
