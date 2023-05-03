@@ -6,17 +6,19 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:29:16 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/06 13:34:20 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:40:13 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	var_env(char ***env, int i)
+void	var_env(char ***env)
 {
 	char	*tmp;
 	t_var	*v;
+	int		i;
 
+	i = 0;
 	v = g_var;
 	while (v)
 	{
@@ -33,15 +35,12 @@ void	var_env(char ***env, int i)
 
 char	**ft_environ(void)
 {
-	extern char	**environ;
 	char		**env;
 	t_var		*v;
 	int			i;
 
 	i = 0;
 	v = g_var;
-	while (environ[i])
-		i++;
 	while (v)
 	{
 		if (v->export)
@@ -49,10 +48,7 @@ char	**ft_environ(void)
 		v = v->next;
 	}
 	env = (char **)(malloc((i + 1) * sizeof(char *)));
-	i = -1;
-	while (environ[++i])
-		env[i] = ft_strcpy(environ[i]);
-	var_env(&env, i);
+	var_env(&env);
 	return (env);
 }
 
@@ -65,7 +61,7 @@ int	exe_path(char **s, char **p, int i, int exe)
 	temp = ft_strjoin(p[i], "/");
 	pa = ft_strjoin(temp, s[0]);
 	free(temp);
-	if (!access(pa, X_OK))
+	if (!access(pa, X_OK) && !is_directory(pa))
 	{
 		if (exe)
 		{
@@ -85,7 +81,7 @@ int	exe_local(char **s, int exe)
 {
 	int	stat;
 
-	if (!access(s[0], X_OK))
+	if (!access(s[0], X_OK) && !is_directory(s[0]))
 	{
 		if (exe)
 		{
@@ -109,7 +105,9 @@ int	programs(char **s, int exe)
 	r = exe_local(s, exe);
 	if (!r)
 	{
-		p = ft_split(getenv("PATH"), ':');
+		if (!ft_varsearch(g_var, "PATH"))
+			return (0);
+		p = ft_split(ft_varsearch(g_var, "PATH")->value, ':');
 		i = -1;
 		while (p[++i])
 		{

@@ -6,13 +6,14 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:47:06 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/17 14:23:59 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:29:29 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <errno.h>
 # include <termios.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -47,6 +48,8 @@ typedef struct s_red
 
 extern t_var	*g_var;
 
+void	ft_new_environ(char **environ);
+
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strcpy(char *src);
 void	ft_free_split(char **s, int all);
@@ -61,6 +64,7 @@ t_var	*ft_varsearch(t_var *var, char *name);
 
 void	space_in_quote(char *str);
 void	del_quote(char *str);
+void	replace_op(char **s);
 
 void	spaces(char **s);
 
@@ -83,8 +87,11 @@ void	exec_op(t_red *orders, int pipes, char *str);
 
 void	open_and_exec(t_red orders);
 
+int		all_spaces(char *str);
+int		is_directory(char *s);
 int		op_pipe_check(char **s);
 int		op_pipe_error(char **s);
+void	no_op_case(char **s, char *str);
 
 int		operators(char *str);
 void	redirections(char **s, t_red *order);
@@ -93,6 +100,7 @@ int		struct_error(t_red *orders, int pipes);
 void	red_struct_init(t_red *order);
 void	orders_arr(char **s, char *str);
 
+int		cases(char **s, char *str);
 int		cases_control(char **s);
 void	ft_error(int *error, char *s, int p);
 

@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:21:52 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/03/24 11:23:17 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:34:52 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,28 @@ void	new_str(char **str, char *value, int start, int end)
 
 void	alnum_var(char **str, int start)
 {
-	extern t_var	*g_var;
-	t_var			*v;
-	char			*name;
-	int				i;
-	int				end;
+	t_var	*v;
+	char	*name;
+	int		i;
+	int		end;
 
 	i = start + 1;
 	while ((*str)[i] == '_' || ft_isalnum((*str)[i]))
 		i++;
 	end = i;
 	name = ft_substr(*str, start + 1, end - (start + 1));
-	if (getenv(name))
-		new_str(str, getenv(name), start, end);
+	v = ft_varsearch(g_var, name);
+	if (v)
+		new_str(str, v->value, start, end);
 	else
-	{
-		v = ft_varsearch(g_var, name);
-		if (v)
-			new_str(str, v->value, start, end);
-		else
-			new_str(str, "", start, end);
-	}
+		new_str(str, "", start, end);
 	free(name);
 }
 
 int	sub_var(char **str, int start)
 {
-	extern t_var	*g_var;
-	t_var			*v;
-	int				i;
+	t_var	*v;
+	int		i;
 
 	i = start + 1;
 	if ((*str)[i] == '?' || (*str)[i] == '_' || ft_isalnum((*str)[i]))
@@ -106,10 +99,9 @@ void	check_var(char **s)
 
 int	var_value(char *str, int export)
 {
-	extern t_var	*g_var;
-	char			*name;
-	char			*value;
-	int				i;
+	char	*name;
+	char	*value;
+	int		i;
 
 	i = 0;
 	while (str[i] == '_' || (str[i] >= '0' && str[i] <= '9')

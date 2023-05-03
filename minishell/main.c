@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 10:21:22 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/04/17 14:22:08 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:29:35 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,19 @@ void	routine(char *str)
 	spaces(s);
 	check_var(s);
 	if (!op_pipe_check(s))
-	{
-		if (!cases(s, str))
-			ft_error(0, s[0], 1);
-		ft_free_split(s, 1);
-	}
+		no_op_case(s, str);
 	else
 	{
 		if (op_pipe_error(s))
 		{
 			ft_free_split(s, 1);
-			write(2, "Error\n", 6);
+			write(2, "Error: Invalid argument\n", 24);
 		}
 		else
+		{
+			replace_op(s);
 			orders_arr(s, str);
+		}
 	}
 	free(str);
 }
@@ -113,6 +112,7 @@ int	main(void)
 	struct termios	t;
 	extern t_var	*g_var;
 	char			*str;
+	extern char		**environ;
 
 	signal(SIGINT, handler_int);
 	signal(SIGQUIT, handler_quit);
@@ -121,11 +121,14 @@ int	main(void)
 	tcsetattr(0, TCSANOW, &t);
 	g_var = 0;
 	ft_varadd_front(&g_var, ft_strcpy("?"), ft_strcpy("0"), 0);
+	ft_new_environ(environ);
 	while (1)
 	{
 		str = readline("minishell> ");
 		if (!str)
 			ft_exit(0, 0);
+		if (all_spaces(str))
+			continue ;
 		if (str[0])
 			routine(str);
 	}

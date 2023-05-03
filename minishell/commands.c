@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:25:31 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/03/24 11:37:32 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:47:44 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 
 void	ft_env(void)
 {
-	extern char	**environ;
 	t_var		*v;
-	int			i;
 
-	i = 0;
-	while (environ[i])
-		printf("%s\n", environ[i++]);
 	v = g_var;
 	while (v)
 	{
@@ -88,16 +83,15 @@ void	ft_cd(char **s)
 {
 	if (s[1])
 	{
-		if (!ft_strcmp(s[1], "-"))
-		{
-			if (chdir(getenv("OLDPWD")))
-				perror("Error");
-			else
-				printf("%s\n", getenv("OLDPWD"));
-		}
-		else if (chdir(s[1]))
+		if (chdir(s[1]))
 			perror("Error");
 	}
 	else
-		chdir(getenv("HOME"));
+	{
+		if (ft_varsearch(g_var, "HOME"))
+		{
+			if (chdir(ft_varsearch(g_var, "HOME")->value))
+				perror("Error");
+		}
+	}
 }
