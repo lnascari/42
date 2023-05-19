@@ -66,7 +66,6 @@ int	all_spaces(char *str)
 	free (str);
 	return (1);
 }
-<<<<<<< HEAD:minishell/check.c
 
 void	no_op_case(char **s, char *str)
 {
@@ -75,5 +74,3 @@ void	no_op_case(char **s, char *str)
 		ft_error(0, s[0], 1);
 	ft_free_split(s, 1);
 }
-=======
->>>>>>> e5fc907b233d9c0130db5a929ee377f265cb5164:minishell/op_pipe.c
