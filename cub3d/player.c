@@ -6,20 +6,11 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:17:40 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/05/23 11:05:26 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:19:20 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	check_spawn_set(int spawn_set)
-{
-	if (!spawn_set)
-	{
-		write (2, "Error\n", 6);
-		exit(1);
-	}
-}
 
 void	set_spawn(t_vars *vars, int *spawn_set, int x, int y)
 {
@@ -45,16 +36,14 @@ void	player_pos(t_vars *vars)
 			if (spawn_set && (vars->map.map[x][y] == 'N'
 				|| vars->map.map[x][y] == 'S' || vars->map.map[x][y] == 'E'
 				|| vars->map.map[x][y] == 'W'))
-			{
-				write(2, "Error\n", 6);
-				exit(1);
-			}
+				map_error(vars, 0, 0, "Invalid spawn set\n");
 			if (vars->map.map[x][y] == 'N' || vars->map.map[x][y] == 'S'
 					|| vars->map.map[x][y] == 'E' || vars->map.map[x][y] == 'W')
 				set_spawn(vars, &spawn_set, x, y);
 		}
 	}
-	check_spawn_set(spawn_set);
+	if (!spawn_set)
+		map_error(vars, 0, 0, "Invalid spawn set\n");
 }
 
 void	check_start_dir_ns(t_vars *vars)

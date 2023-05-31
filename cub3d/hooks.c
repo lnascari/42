@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:11:03 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/05/23 13:34:20 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:07:28 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,78 +14,70 @@
 
 int	x_hook(t_vars *vars)
 {
-	int	i;
-
-	i = -1;
-	while (++i < 5)
-		mlx_destroy_image(vars->mlx, vars->images[i].img);
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-	free_map(vars);
-	exit(0);
+	exit_and_destroy(vars);
 	return (0);
 }
 
 void	arr_left(t_vars *vars)
 {
 	vars->old_dir_x = vars->dir_x;
-	vars->dir_x = vars->dir_x * cos(0.174533) - vars->dir_y * sin(0.174533);
-	vars->dir_y = vars->old_dir_x * sin(0.174533)
-		+ vars->dir_y * cos(0.174533);
+	vars->dir_x = vars->dir_x * cos(M_PI / 300)
+		- vars->dir_y * sin(M_PI / 300);
+	vars->dir_y = vars->old_dir_x * sin(M_PI / 300)
+		+ vars->dir_y * cos(M_PI / 300);
 	vars->old_plane_x = vars->plane_x;
-	vars->plane_x = vars->plane_x * cos(0.174533)
-		- vars->plane_y * sin(0.174533);
-	vars->plane_y = vars->old_plane_x * sin(0.174533)
-		+ vars->plane_y * cos(0.174533);
-	mlx_destroy_image(vars->mlx, vars->images[0].img);
-	ground_and_sky(vars);
-	ray_casting_loop(vars);
+	vars->plane_x = vars->plane_x * cos(M_PI / 300)
+		- vars->plane_y * sin(M_PI / 300);
+	vars->plane_y = vars->old_plane_x * sin(M_PI / 300)
+		+ vars->plane_y * cos(M_PI / 300);
 }
 
 void	arr_right(t_vars *vars)
 {
 	vars->old_dir_x = vars->dir_x;
-	vars->dir_x = vars->dir_x * cos(-0.174533)
-		- vars->dir_y * sin(-0.174533);
-	vars->dir_y = vars->old_dir_x * sin(-0.174533)
-		+ vars->dir_y * cos(-0.174533);
+	vars->dir_x = vars->dir_x * cos(-M_PI / 300)
+		- vars->dir_y * sin(-M_PI / 300);
+	vars->dir_y = vars->old_dir_x * sin(-M_PI / 300)
+		+ vars->dir_y * cos(-M_PI / 300);
 	vars->old_plane_x = vars->plane_x;
-	vars->plane_x = vars->plane_x * cos(-0.174533)
-		- vars->plane_y * sin(-0.174533);
-	vars->plane_y = vars->old_plane_x * sin(-0.174533)
-		+ vars->plane_y * cos(-0.174533);
-	mlx_destroy_image(vars->mlx, vars->images[0].img);
-	ground_and_sky(vars);
-	ray_casting_loop(vars);
+	vars->plane_x = vars->plane_x * cos(-M_PI / 300)
+		- vars->plane_y * sin(-M_PI / 300);
+	vars->plane_y = vars->old_plane_x * sin(-M_PI / 300)
+		+ vars->plane_y * cos(-M_PI / 300);
+}
+
+int	key_release_hook(int keycode, t_vars *vars)
+{
+	if (keycode == W_KEY)
+		vars->w_is_pressed = 0;
+	if (keycode == A_KEY)
+		vars->a_is_pressed = 0;
+	if (keycode == S_KEY)
+		vars->s_is_pressed = 0;
+	if (keycode == D_KEY)
+		vars->d_is_pressed = 0;
+	if (keycode == ARR_LEFT)
+		vars->p_is_rotating_l = 0;
+	if (keycode == ARR_RIGHT)
+		vars->p_is_rotating_r = 0;
+	return (0);
 }
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	int	i;
-
 	if (keycode == ESC_KEY)
-	{
-		i = -1;
-		while (++i < 5)
-			mlx_destroy_image(vars->mlx, vars->images[i].img);
-		mlx_destroy_window(vars->mlx, vars->win);
-		mlx_destroy_display(vars->mlx);
-		free(vars->mlx);
-		free_map(vars);
-		exit(0);
-	}
+		exit_and_destroy(vars);
 	else if (keycode == W_KEY)
-		w_key(vars);
+		vars->w_is_pressed = 1;
 	else if (keycode == A_KEY)
-		a_key(vars);
+		vars->a_is_pressed = 1;
 	else if (keycode == S_KEY)
-		s_key(vars);
+		vars->s_is_pressed = 1;
 	else if (keycode == D_KEY)
-		d_key(vars);
+		vars->d_is_pressed = 1;
 	else if (keycode == ARR_LEFT)
-		arr_left(vars);
+		vars->p_is_rotating_l = 1;
 	else if (keycode == ARR_RIGHT)
-		arr_right(vars);
+		vars->p_is_rotating_r = 1;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:08:10 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/05/23 13:54:20 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:33:55 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ void	ray_casting_loop(t_vars *vars)
 				my_mlx_pixel_put(vars, x, y, my_mlx_pixel(vars, vars->tex_x,
 						vars->tex_y, vars->side + 1));
 		}
-		mlx_put_image_to_window(vars->mlx, vars->win,
-			vars->images[0].img, 0, 0);
+		vars->z_buffer[x] = vars->perp_wall_dist;
 	}
 }
 
@@ -77,28 +76,58 @@ void	assign_textures(t_vars	*vars)
 	}
 }
 
+int	loop_hook(void *v_vars)
+{
+	t_vars	*vars;
+
+	vars = (t_vars *)v_vars;
+	mlx_destroy_image(vars->mlx, vars->images[0].img);
+	ground_and_sky(vars);
+	ray_casting_loop(vars);
+	put_sprite(vars);
+	if (vars->sprite_count == 14)
+		vars->sprite_count = 0;
+	if (vars->w_is_pressed == 1)
+		w_key(vars);
+	if (vars->a_is_pressed == 1)
+		a_key(vars);
+	if (vars->s_is_pressed == 1)
+		s_key(vars);
+	if (vars->d_is_pressed == 1)
+		d_key(vars);
+	if (vars->p_is_rotating_l == 1)
+		arr_left(vars);
+	if (vars->p_is_rotating_r == 1)
+		arr_right(vars);
+	mlx_put_image_to_window(vars->mlx, vars->win,
+		vars->images[0].img, 0, 0);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
-	
-	if (argc != 2)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+
 	ft_bzero(&vars, sizeof(t_vars));
+	if (argc != 2)
+		map_error(&vars, 0, 0, "Invalid number of arguments\n");
 	ft_map(&vars, argv[1]);
+	tex_ext_check(&vars);
 	player_pos(&vars);
+	check_map_format(&vars);
+	check_sprite_map(&vars);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "cub3D");
 	mlx_hook(vars.win, 2, (1L << 0), key_hook, &vars);
+	mlx_hook(vars.win, 3, (1L << 1), key_release_hook, &vars);
 	mlx_hook(vars.win, 17, 0, x_hook, &vars);
 	assign_textures(&vars);
+	sprite_init(&vars);
 	ground_and_sky(&vars);
 	if (vars.spawn_char == 'N' || vars.spawn_char == 'S')
 		check_start_dir_ns(&vars);
 	else if (vars.spawn_char == 'E' || vars.spawn_char == 'W')
 		check_start_dir_ew(&vars);
-	ray_casting_loop(&vars);
+	mlx_loop_hook(vars.mlx, &loop_hook, &vars);
 	mlx_loop(vars.mlx);
 }

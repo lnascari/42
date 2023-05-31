@@ -6,7 +6,7 @@
 /*   By: gpaoline <gpaoline@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:15:19 by gpaoline          #+#    #+#             */
-/*   Updated: 2023/05/19 10:16:33 by gpaoline         ###   ########.fr       */
+/*   Updated: 2023/05/27 21:52:51 by gpaoline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,14 @@ unsigned int	my_mlx_pixel(t_vars *vars, int x, int y, int i)
 
 	dst = vars->images[i].addr + (y * vars->images[i].line_length
 			+ x * (vars->images[i].bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
+}
+
+unsigned int	my_mlx_pixel_sprite(t_vars *vars, int x, int y, int i)
+{
+	char	*dst;
+
+	dst = vars->sprite[i].image.addr + (y * vars->sprite[i].image.line_length
+			+ x * (vars->sprite[i].image.bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
 }

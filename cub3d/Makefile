@@ -1,6 +1,7 @@
 FILES = \
 	hooks.c wasd_keys.c ray_casting.c image_and_pixels.c player.c map.c \
-	get_next_line.c
+	get_next_line.c sprite.c free_and_error.c main_checks.c check_map.c \
+	check.c
 
 OBJ = $(FILES:.c=.o)
 
