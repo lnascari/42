@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 13:40:37 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 13:42:19 by lnascari         ###   ########.fr       */
+/*   Created: 2022/10/03 15:39:10 by lnascari          #+#    #+#             */
+/*   Updated: 2022/10/03 15:39:12 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+size_t	ft_strlen(const char *s)
 {
-	size_t	i;
-	char	tmp[1024];
+	int	i;
 
-	i = -1;
-	while (++i < n)
-		tmp[i] = ((char *) src)[i];
-	i = -1;
-	while (++i < n)
-		((char *) dest)[i] = tmp[i];
-	return (dest);
+	i = 0;
+	while (s[i] != 0)
+	{
+		i++;
+	}
+	return (i);
 }

@@ -3,21 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 12:58:07 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 13:00:08 by lnascari         ###   ########.fr       */
+/*   Created: 2022/10/04 12:15:28 by lnascari          #+#    #+#             */
+/*   Updated: 2022/10/04 12:15:31 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <string.h>
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t	i;
+	char	*d;
+	int		i;
 
-	i = -1;
-	while (++i < n)
-		((char *) dest)[i] = ((char *) src)[i];
+	d = dest;
+	i = 0;
+	while ((long unsigned int) i < n)
+	{
+		d[i] = *(char *)(src + i);
+		i++;
+	}
 	return (dest);
 }
+
+/* int main () {
+   const char src[50] = "abcdefghijk";
+   char dest[50] = "0123456789";
+   printf("Before memcpy dest = %s\n", dest);
+   ft_memcpy(&dest, &src, sizeof(char) * 9);
+   printf("After memcpy dest = %s\n", dest);
+} */

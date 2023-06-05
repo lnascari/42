@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 12:37:04 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 12:39:38 by lnascari         ###   ########.fr       */
+/*   Created: 2022/10/04 12:05:05 by lnascari          #+#    #+#             */
+/*   Updated: 2022/10/04 12:05:17 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
+#include <stdio.h>
 
-size_t	ft_strlen(const char *s)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
+	char	*str;
+	int		i;
 
 	i = 0;
-	while (s[i])
+	str = s;
+	while ((long unsigned int) i < n)
+	{
+		str[i] = 0;
 		i++;
-	return (i);
+	}
 }
+
+/* int main(){
+	char x[] = "aaaaaaa";
+	ft_bzero(&x, 5);
+	printf("\n%s", x);
+} */

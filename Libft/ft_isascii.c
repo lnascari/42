@@ -3,24 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 15:09:29 by lnascari          #+#    #+#             */
-/*   Updated: 2022/10/03 15:09:31 by lnascari         ###   ########.fr       */
+/*   Created: 2023/06/05 12:23:29 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/05 12:24:17 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
+#include "libft.h"
 
 int	ft_isascii(int c)
-{
-	if (c > 127)
-	{
-		return (0);
-	}
-	return (1);
+{	
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
-
-/* int main(){
-	printf("%d\n", ft_isascii(0x80));
-} */

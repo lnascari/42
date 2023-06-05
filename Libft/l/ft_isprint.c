@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 13:40:37 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 13:42:19 by lnascari         ###   ########.fr       */
+/*   Created: 2022/10/03 15:16:56 by lnascari          #+#    #+#             */
+/*   Updated: 2022/10/21 13:20:13 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+// #include <stdio.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int	ft_isprint(int c)
 {
-	size_t	i;
-	char	tmp[1024];
-
-	i = -1;
-	while (++i < n)
-		tmp[i] = ((char *) src)[i];
-	i = -1;
-	while (++i < n)
-		((char *) dest)[i] = tmp[i];
-	return (dest);
+	if (c < 32 || c > 126)
+	{
+		return (0);
+	}
+	return (1);
 }
+
+/* int main(){
+	printf("%d\n", ft_isprint(127));
+} */

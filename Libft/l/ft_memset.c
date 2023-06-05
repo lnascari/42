@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memeset.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
+/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 12:42:55 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 12:47:23 by lnascari         ###   ########.fr       */
+/*   Created: 2022/10/03 15:52:28 by lnascari          #+#    #+#             */
+/*   Updated: 2022/10/03 15:52:30 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
+#include <stdio.h>
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t	i;
+	char	*str;
+	int		i;
 
-	i = -1;
-	while (++i < n)
-		((char *) s)[i] = c;
+	i = 0;
+	str = s;
+	while ((long unsigned int) i < n)
+	{
+		str[i] = c;
+		i++;
+	}
 	return (s);
 }
+
+/* int main(){
+	char x[] = "aaaaaaa";
+	ft_memset(&x, '@', sizeof(char) * 5);
+	printf("%s\n", x);
+} */

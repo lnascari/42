@@ -5,22 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 15:16:56 by lnascari          #+#    #+#             */
-/*   Updated: 2022/10/21 13:20:13 by lnascari         ###   ########.fr       */
+/*   Created: 2023/06/05 12:24:31 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/05 12:25:05 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
+#include "libft.h"
 
 int	ft_isprint(int c)
-{
-	if (c < 32 || c > 126)
-	{
-		return (0);
-	}
-	return (1);
+{	
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }
-
-/* int main(){
-	printf("%d\n", ft_isprint(127));
-} */
