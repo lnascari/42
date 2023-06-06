@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:04:57 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/06 12:18:45 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:28:35 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ char	*ft_strrchr(const char *s, int c)
 	p = 0;
 	while (*s)
 	{
-		if (*s++ == c)
+		if (*s == c)
 			p = (char *) s;
+		s++;
 	}
 	return (p);
 }

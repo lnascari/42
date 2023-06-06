@@ -6,7 +6,7 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:10:05 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/06 13:13:26 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:20:54 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (++i < n)
 	{
 		if (((char *) s)[i] == c)
-			return (s + i);
+			return ((void *) s + i);
 	}
 	return (0);
 }
