@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 17:14:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/10/12 17:14:43 by lnascari         ###   ########.fr       */
+/*   Created: 2023/06/07 14:45:10 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/07 14:47:36 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	write(fd, &c, 1);
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }
-
-/* int	main()
-{
-	ft_putchar_fd('?', 1);
-} */

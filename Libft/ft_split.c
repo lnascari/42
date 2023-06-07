@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/07 10:52:27 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/07 12:43:43 by lnascari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static char	ft_splitsize(char const *s, char c)
@@ -24,7 +36,7 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 	int		i;
 
-	split = ft_calloc(ft_splitsize(s, c) + 1, sizeof(char));
+	split = ft_calloc(ft_splitsize(s, c) + 1, sizeof(char *));
 	if (!split || !s)
 		return (0);
 	i = -1;

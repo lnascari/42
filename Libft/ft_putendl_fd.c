@@ -3,35 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 17:29:12 by lnascari          #+#    #+#             */
-/*   Updated: 2022/10/12 17:29:14 by lnascari         ###   ########.fr       */
+/*   Created: 2023/06/07 13:20:19 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/07 13:21:47 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-
-static int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != 0)
-	{
-		i++;
-	}
-	return (i);
-}
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
 }
-
-/* int	main()
-{
-	ft_putendl_fd("whefbiufb", 1);
-} */

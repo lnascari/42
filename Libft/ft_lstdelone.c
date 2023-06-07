@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 15:58:10 by lnascari          #+#    #+#             */
-/*   Updated: 2022/10/04 15:58:12 by lnascari         ###   ########.fr       */
+/*   Created: 2023/06/07 14:37:19 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/07 14:39:22 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_toupper(int c)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (c > 96 && c < 123)
-		c -= 32;
-	return (c);
+	del(lst);
 }
-
-/* int main()
-{
-	printf("%c\n", ft_toupper('.'));
-} */

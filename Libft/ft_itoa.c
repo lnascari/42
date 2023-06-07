@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/07 10:56:11 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/07 10:57:44 by lnascari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static char	*ft_tostr(int n, int sgn)
@@ -5,7 +17,7 @@ static char	*ft_tostr(int n, int sgn)
 	char	*str;
 	int		tmp;
 	int		i;
-	
+
 	tmp = n;
 	i = 0;
 	while (tmp >= 1)
@@ -31,9 +43,9 @@ char	*ft_itoa(int n)
 	int	sgn;
 
 	if (!n)
-		return (ft_strcpy("0"));
+		return (ft_strdup("0"));
 	if (n == -2147483648)
-		return (ft_strcpy("-2147483648"));
+		return (ft_strdup("-2147483648"));
 	sgn = 1;
 	if (n < 0)
 		sgn = -1;

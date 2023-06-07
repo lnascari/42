@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 14:31:13 by lnascari          #+#    #+#             */
-/*   Updated: 2022/10/03 14:31:18 by lnascari         ###   ########.fr       */
+/*   Created: 2023/06/07 14:05:55 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/07 14:07:13 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
+#include "libft.h"
 
-int	ft_isdigit(int c)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (c < 48 || c > 57)
-	{
-		return (0);
-	}
-	return (1);
+	new->next = *lst;
+	*lst = new;
 }
-
-/* int main(){
-	printf("%d\n", ft_isdigit(':'));
-} */

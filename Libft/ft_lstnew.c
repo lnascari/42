@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 16:58:22 by lnascari          #+#    #+#             */
-/*   Updated: 2022/10/15 17:28:44 by lnascari         ###   ########.fr       */
+/*   Created: 2023/06/07 13:59:26 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/07 14:03:26 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 t_list	*ft_lstnew(void *content)
 {

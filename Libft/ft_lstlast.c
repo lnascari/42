@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 15:16:56 by lnascari          #+#    #+#             */
-/*   Updated: 2022/10/21 13:20:13 by lnascari         ###   ########.fr       */
+/*   Created: 2023/06/07 14:13:30 by lnascari          #+#    #+#             */
+/*   Updated: 2023/06/07 15:01:27 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
+#include "libft.h"
 
-int	ft_isprint(int c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (c < 32 || c > 126)
+	while (lst)
 	{
-		return (0);
+		if (!lst->next)
+			return (lst);
+		lst = lst->next;
 	}
-	return (1);
+	return (0);
 }
-
-/* int main(){
-	printf("%d\n", ft_isprint(127));
-} */
