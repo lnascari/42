@@ -23,7 +23,7 @@ $(NAME): $(OBJ)
 	ar -crs $(NAME) $(OBJ)
 
 %.o: %.c
-	gcc -Wall -Wextra -Werror -c $?
+	cc -Wall -Wextra -Werror -c $?
 
 clean:
 	rm -f ./*.o
