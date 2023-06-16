@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <limits>
+#include <cstdlib>
 
 class Contact
 {

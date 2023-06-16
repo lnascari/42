@@ -2,13 +2,11 @@
 
 std::string Contact::getValue(std::string field)
 {
-	std::string str = "SSDFSF";
+	std::string str;
 
 	while (1) {
-		std::cout << str;
 		std::cout << "Insert your " << field << ": ";
 		std::getline(std::cin, str);
-		std::cout << str;
 		if (!str.empty())
 			break;
 		std::cout << "Field is empty" << std::endl;
@@ -25,6 +23,7 @@ std::string Contact::formattedValue(std::string value)
 
 void Contact::fillContact()
 {
+	std::cin.ignore ( std::numeric_limits<std::streamsize>::max(), '\n');
 	firstName = getValue("first name");
 	lastName = getValue("last name");
 	nickname = getValue("nickname");
