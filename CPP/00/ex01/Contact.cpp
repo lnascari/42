@@ -23,7 +23,7 @@ std::string Contact::formattedValue(std::string value)
 
 void Contact::fillContact()
 {
-	std::cin.ignore ( std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	firstName = getValue("first name");
 	lastName = getValue("last name");
 	nickname = getValue("nickname");
