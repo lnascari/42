@@ -2,7 +2,7 @@ FILES =  Account.cpp
 
 OBJ = $(FILES:.cpp=.o)
 
-NAME = account
+NAME = tests
 
 $(NAME): tests.cpp $(OBJ)
 	c++ -Wall -Wextra -Werror -std=c++98 tests.cpp $(OBJ) -o $(NAME)
