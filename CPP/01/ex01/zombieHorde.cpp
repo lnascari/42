@@ -2,8 +2,8 @@
 
 Zombie* zombieHorde(int N, std::string name)
 {
-	Zombie* arr = static_cast<Zombie*>(::operator new[](N*sizeof(Zombie)));
-    for (size_t i = 0; i < N; i++)
-        ::new (arr+i) Zombie(name);
-    return arr;
+	Zombie* horde = new Zombie[N];
+    for (int i = 0; i < N; i++)
+        horde[i].setName(name);
+    return horde;
 }
