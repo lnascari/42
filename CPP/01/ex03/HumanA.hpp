@@ -9,7 +9,7 @@ private:
     std::string name;
     Weapon& wpn;
 public:
-    HumanA(std::string name, Weapon wpn);
+    HumanA(std::string name, Weapon& wpn);
     void attack();
 };
 

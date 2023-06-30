@@ -6,7 +6,7 @@ HumanB::HumanB(std::string name)
     wpn = 0;
 }
 
-void HumanB::setWeapon(Weapon wpn)
+void HumanB::setWeapon(Weapon& wpn)
 {
     this->wpn = &wpn;
 }
