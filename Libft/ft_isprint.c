@@ -6,14 +6,14 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 12:24:31 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 12:25:05 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:43:19 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 int	ft_isprint(int c)
-{	
+{
 	if (c >= 32 && c <= 126)
 		return (1);
 	return (0);

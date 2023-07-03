@@ -6,14 +6,14 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 12:17:07 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 12:20:25 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:42:38 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 int	ft_isdigit(int c)
-{	
+{
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);

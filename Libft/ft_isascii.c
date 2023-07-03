@@ -6,14 +6,14 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 12:23:29 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 12:24:17 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:42:59 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 int	ft_isascii(int c)
-{	
+{
 	if (c >= 0 && c <= 127)
 		return (1);
 	return (0);

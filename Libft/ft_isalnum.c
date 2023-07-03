@@ -6,14 +6,14 @@
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 12:19:07 by lnascari          #+#    #+#             */
-/*   Updated: 2023/06/05 12:20:57 by lnascari         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:44:11 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 int	ft_isalnum(int c)
-{	
+{
 	if (ft_isalpha(c) || ft_isdigit(c))
 		return (1);
 	return (0);
