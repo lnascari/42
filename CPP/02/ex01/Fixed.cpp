@@ -8,20 +8,14 @@ Fixed::Fixed()
 
 Fixed::Fixed(const int n)
 {
+	std::cout << "Int constructor called" << std::endl;
 	this->n = n << 8;
 }
 
 Fixed::Fixed(const float n)
 {
-	union bits
-	{
-		float f;
-		unsigned n;
-	} u_bits;
-	u_bits.f = n;
-	bool sign = u_bits.n >> 31;
-	int exp = (u_bits.n << 1) >> 24;
-	int mant = (u_bits.n << 9) >> 9;
+	std::cout << "Float constructor called" << std::endl;
+	this->n = roundf(n * 256);
 }
 
 Fixed::Fixed(const Fixed &f)
@@ -35,7 +29,7 @@ Fixed &Fixed::operator=(const Fixed &f)
 	std::cout << "Copy assignment operator called" << std::endl;
 	if(this == &f)
        return *this;
-	n = f.getRawBits();
+	n = f.n;
 	return *this;
 }
 
@@ -58,10 +52,16 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat(void) const
 {
-	return 0.0f;
+	return n / 256.0;
 }
 
 int Fixed::toInt(void) const
 {
-	return 0;
+	return n >> 8;
+}
+
+std::ostream &operator<<(std::ostream &os, const Fixed &f)
+{
+	os << f.toFloat();
+	return os;
 }
