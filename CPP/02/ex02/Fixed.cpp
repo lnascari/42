@@ -93,6 +93,32 @@ Fixed &Fixed::operator/(const Fixed &f) const
 	return r;
 }
 
+Fixed &Fixed::operator++()
+{
+	n++;
+	return *this;
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed r(*this);
+	n++;
+	return r;
+}
+
+Fixed &Fixed::operator--()
+{
+	n--;
+	return *this;
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed r(*this);
+	n--;
+	return r;
+}
+
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called" << std::endl;
@@ -124,4 +150,32 @@ std::ostream &operator<<(std::ostream &os, const Fixed &f)
 {
 	os << f.toFloat();
 	return os;
+}
+
+Fixed &Fixed::min(Fixed & a, Fixed &b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+const Fixed &Fixed::min(const Fixed & a, const Fixed & b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+Fixed &Fixed::max(Fixed & a, Fixed &b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+const Fixed &Fixed::max(const Fixed & a, const Fixed & b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }
