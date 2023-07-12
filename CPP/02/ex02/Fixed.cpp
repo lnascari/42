@@ -33,64 +33,54 @@ Fixed &Fixed::operator=(const Fixed &f)
 	return *this;
 }
 
-bool &Fixed::operator>(const Fixed &f) const
+bool Fixed::operator>(const Fixed &f) const
 {
-	bool b = n > f.n;
-	return b;
+	return n > f.n;
 }
 
-bool &Fixed::operator<(const Fixed &f) const
+bool Fixed::operator<(const Fixed &f) const
 {
-	bool b = n < f.n;
-	return b;
+	return n < f.n;
 }
 
-bool &Fixed::operator>=(const Fixed &f) const
+bool Fixed::operator>=(const Fixed &f) const
 {
-	bool b = n >= f.n;
-	return b;
+	return n >= f.n;
 }
 
-bool &Fixed::operator<=(const Fixed &f) const
+bool Fixed::operator<=(const Fixed &f) const
 {
-	bool b = n <= f.n;
-	return b;
+	return n <= f.n;
 }
 
-bool &Fixed::operator==(const Fixed &f) const
+bool Fixed::operator==(const Fixed &f) const
 {
-	bool b = n == f.n;
-	return b;
+	return n == f.n;
 }
 
-bool &Fixed::operator!=(const Fixed &f) const
+bool Fixed::operator!=(const Fixed &f) const
 {
-	bool b = n != f.n;
-	return b;
+	return n != f.n;
 }
 
-Fixed &Fixed::operator+(const Fixed &f) const
+Fixed Fixed::operator+(const Fixed &f) const
 {
-	Fixed r(this->toFloat() + f.toFloat());
-	return r;
+	return Fixed(this->toFloat() + f.toFloat());
 }
 
-Fixed &Fixed::operator-(const Fixed &f) const
+Fixed Fixed::operator-(const Fixed &f) const
 {
-	Fixed r(this->toFloat() - f.toFloat());
-	return r;
+	return Fixed(this->toFloat() - f.toFloat());
 }
 
-Fixed &Fixed::operator*(const Fixed &f) const
+Fixed Fixed::operator*(const Fixed &f) const
 {
-	Fixed r(this->toFloat() + f.toFloat());
-	return r;
+	return Fixed(this->toFloat() * f.toFloat());
 }
 
-Fixed &Fixed::operator/(const Fixed &f) const
+Fixed Fixed::operator/(const Fixed &f) const
 {
-	Fixed r(this->toFloat() / f.toFloat());
-	return r;
+	return Fixed(this->toFloat() / f.toFloat());
 }
 
 Fixed &Fixed::operator++()
