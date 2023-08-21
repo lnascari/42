@@ -1,8 +1,8 @@
-FILES = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+FILES = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 OBJ = $(FILES:.cpp=.o)
 
-NAME = fragtrap
+NAME = diamondtrap
 
 $(NAME): main.cpp $(OBJ)
 	c++ -Wall -Wextra -Werror -std=c++98 main.cpp $(OBJ) -o $(NAME)

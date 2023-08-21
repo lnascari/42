@@ -17,7 +17,7 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), name
 	attackDamage = FragTrap::attackDamage;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &d)
+DiamondTrap::DiamondTrap(const DiamondTrap &d) : ClapTrap(d), ScavTrap(d), FragTrap(d)
 {
 	*this = d;
 }
@@ -36,4 +36,9 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &d)
 DiamondTrap::~DiamondTrap()
 {
 	std::cout << "DiamondTrap destructor" << std::endl;
+}
+
+void DiamondTrap::whoAmI()
+{
+	std::cout << "DiamondTrap " << name << " ClapTrap " << ClapTrap::name << std::endl;
 }

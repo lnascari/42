@@ -16,7 +16,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 	attackDamage = 20;
 }
 
-FragTrap::FragTrap(const FragTrap &f)
+FragTrap::FragTrap(const FragTrap &f) : ClapTrap(f)
 {
 	*this = f;
 }

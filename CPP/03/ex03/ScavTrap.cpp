@@ -16,7 +16,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	attackDamage = 20;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &s)
+ScavTrap::ScavTrap(const ScavTrap &s) : ClapTrap(s)
 {
 	*this = s;
 }
