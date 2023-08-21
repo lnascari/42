@@ -7,6 +7,8 @@ int main ()
 	d.beRepaired(2);
 	d.guardGate();
 	d.attack("Giambattista");
-	d.takeDamage(50);
+	d.takeDamage(100);
 	d.attack("Gigi");
+	d.takeDamage(2);
+	d.beRepaired(3000);
 }

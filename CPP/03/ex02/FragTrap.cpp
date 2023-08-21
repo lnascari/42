@@ -39,7 +39,7 @@ FragTrap::~FragTrap()
 
 void FragTrap::attack(const std::string &target)
 {
-	if (hitPoints < 0) {
+	if (hitPoints <= 0) {
 		std::cout << "FragTrap " << name << " is dead" << std::endl;
 	} else if (!energyPoints) {
 		std::cout << "FragTrap " << name << " can't attack" << std::endl;
