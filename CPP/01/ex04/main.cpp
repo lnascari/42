@@ -4,7 +4,7 @@
 
 int main(int argc, char const *argv[])
 {
-    if (argc != 4) {
+    if (argc != 4 || std::string(argv[2]).empty()) {
         std::cout << "Invalid number of arguments" << std::endl;
         return 1;
     }
