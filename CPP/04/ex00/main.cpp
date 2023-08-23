@@ -17,5 +17,10 @@ int main()
 	std::cout << k->getType() << " " << std::endl;
 	k->makeSound();
 	w->makeSound();
+	delete meta;
+	delete j;
+	delete i;
+	delete w;
+	delete k;
 	return 0;
 }
