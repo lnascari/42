@@ -1,7 +1,7 @@
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
-#include <string.h>
+#include <string>
 #include <iostream>
 
 class Animal
