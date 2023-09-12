@@ -3,11 +3,13 @@
 
 #include <string.h>
 #include <iostream>
+#include "Brain.hpp"
 
 class Animal
 {
 protected:
 	std::string type;
+	Brain *brain;
 public:
 	Animal();
 	Animal(const Animal &a);
@@ -15,6 +17,7 @@ public:
 	virtual ~Animal();
 	virtual void makeSound() const;
 	std::string getType() const;
+	virtual void printIdea(int index) = 0;
 };
 
 #endif

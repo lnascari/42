@@ -23,7 +23,12 @@ Brain::~Brain()
 	std::cout << "Brain destructor" << std::endl;
 }
 
+void Brain::setIdea(std::string idea, int index)
+{
+	ideas[index] = idea;
+}
+
 std::string Brain::getIdea(int index)
 {
-	return std::string();
+	return ideas[index];
 }
