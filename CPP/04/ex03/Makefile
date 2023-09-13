@@ -1,8 +1,8 @@
-FILES = 
+FILES = AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp 
 
 OBJ = $(FILES:.cpp=.o)
 
-NAME = 
+NAME = character
 
 $(NAME): main.cpp $(OBJ)
 	c++ -Wall -Wextra -Werror -std=c++98 main.cpp $(OBJ) -o $(NAME)

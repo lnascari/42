@@ -11,6 +11,7 @@ Ice::Ice(const Ice &i) : AMateria(i)
 
 Ice & Ice::operator=(const Ice & i)
 {
+	(void) i;
 	return *this;
 }
 

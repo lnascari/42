@@ -11,6 +11,7 @@ Cure::Cure(const Cure &c) : AMateria(c)
 
 Cure & Cure::operator=(const Cure & c)
 {
+	(void) c;
 	return *this;
 }
 
