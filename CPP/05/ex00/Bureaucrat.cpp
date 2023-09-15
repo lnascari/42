@@ -4,7 +4,7 @@ std::ostream &operator<<(std::ostream &os, Bureaucrat &b)
 {
 	std::stringstream s;
 	s << b.getGrade();
-	os << b.getName() + ", bureaucrat grade " << s.str();
+	os << b.getName() + ", bureaucrat grade " << s.str() << std::endl;
 	return os;
 }
 
@@ -18,6 +18,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name)
 		this->grade = grade;
 	}
 	catch(const std::exception& e) {
+		this->grade = 1;
 		std::cout << e.what() << std::endl;
 	}
 }
@@ -51,7 +52,7 @@ int Bureaucrat::getGrade()
 void Bureaucrat::increment()
 {
 	try {
-		if (grade == 1)
+		if (grade <= 1)
 			throw GradeTooHighException();
 		grade--;
 	}
@@ -63,7 +64,7 @@ void Bureaucrat::increment()
 void Bureaucrat::decrement()
 {
 	try {
-		if (grade == 150)
+		if (grade >= 150)
 			throw GradeTooLowException();
 		grade++;
 	}

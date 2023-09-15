@@ -21,13 +21,13 @@ public:
 	void decrement();
 	class GradeTooHighException : public std::exception {
 	public:
-		char *what() {
+		const char *what() const throw() {
 			return "Grade too high";
 		}
 	};
 	class GradeTooLowException : public std::exception {
 	public:
-		char *what() {
+		const char *what() const throw() {
 			return "Grade too low";
 		}
 	};
