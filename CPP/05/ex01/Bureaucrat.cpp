@@ -79,5 +79,5 @@ void Bureaucrat::signForm(Form &f)
 	if (!e)
 		std::cout << name << " signed " << f.getName() << std::endl;
 	else
-		std::cout << name << "  couldn't sign " << f.getName() << " because " << e << std::endl;
+		std::cout << name << " couldn't sign " << f.getName() << " because " << e << std::endl;
 }

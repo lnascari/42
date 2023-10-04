@@ -3,6 +3,8 @@
 
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 private:
@@ -15,10 +17,10 @@ public:
 	Form(const Form &f);
 	Form &operator=(const Form &f);
 	~Form();
-	const std::string getName();
+	std::string getName() const;
 	bool getSigned();
-	const int getSign();
-	const int getExecute();
+	int getSign() const;
+	int getExecute() const;
 	const char *beSigned(Bureaucrat &b);
 	class GradeTooHighException : public std::exception {
 	public:

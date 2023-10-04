@@ -7,6 +7,7 @@ std::ostream &operator<<(std::ostream &os, Form &f)
 	os << ", execute grade ";
 	os << f.getExecute();
 	os << std::endl;
+	return os;
 }
 
 Form::Form(const std::string name, const int sign, const int execute) : name(name), sign(sign), execute(execute)
@@ -22,7 +23,7 @@ Form::Form(const std::string name, const int sign, const int execute) : name(nam
 	}
 }
 
-Form::Form(const Form &f) : name(name), sign(sign), execute(execute)
+Form::Form(const Form &f) : sign(f.sign), execute(f.execute)
 {
 	*this = f;
 }
@@ -37,7 +38,7 @@ Form &Form::operator=(const Form &f)
 
 Form::~Form() {}
 
-const std::string Form::getName()
+std::string Form::getName() const
 {
 	return name;
 }
@@ -47,12 +48,12 @@ bool Form::getSigned()
 	return isSigned;
 }
 
-const int Form::getSign()
+int Form::getSign() const
 {
 	return sign;
 }
 
-const int Form::getExecute()
+int Form::getExecute() const
 {
 	return execute;
 }
@@ -64,7 +65,7 @@ const char *Form::beSigned(Bureaucrat &b)
 	try {
 		if (b.getGrade() > sign)
 			throw GradeTooLowException();
-		isSigned = true;
+		this->isSigned = true;
 	}
 	catch(const std::exception& e) {
 		std::cout << e.what() << std::endl;

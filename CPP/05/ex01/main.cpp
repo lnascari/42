@@ -2,15 +2,14 @@
 
 int main()
 {
-	Bureaucrat b("franco", 170);
+	Bureaucrat b("franco", 82);
 	b.increment();
 	std::cout << b;
-	for (size_t i = 0; i < 150; i++)
-		b.decrement();
+	Form f("gigi", 80, 80);
+	std::cout << f;
+	b.signForm(f);
+	b.increment();
+	b.signForm(f);
+	std::cout << f;
 	std::cout << b;
-	Bureaucrat b2("paolo", 7);
-	std::cout << b2;
-	for (size_t i = 0; i < 10; i++)
-		b2.increment();
-	std::cout << b2;
 }
