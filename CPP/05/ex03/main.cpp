@@ -6,4 +6,5 @@ int main()
 	AForm* rrf;
 	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 	delete rrf;
+	rrf = someRandomIntern.makeForm("pippo", "gianni");
 }
