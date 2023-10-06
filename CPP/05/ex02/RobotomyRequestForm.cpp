@@ -28,8 +28,11 @@ const char *RobotomyRequestForm::execute(Bureaucrat &executor)
 		if (executor.getGrade() > getExecute())
 			throw GradeTooLowException();
 		std::cout << "some drilling noises" << std::endl;
-		if (1)
-			std::cout << target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+		srand((unsigned)time(0)); 
+		if (rand() % 2)
+			std::cout << target << " has been robotomized" << std::endl;
+		else
+			std::cout << "robotomy failed" << std::endl;
 	}
 	catch(const std::exception& e) {
 		std::cout << e.what() << std::endl;

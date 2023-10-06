@@ -1,4 +1,4 @@
-FILES = Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp
+FILES = Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
 OBJ = $(FILES:.cpp=.o)
 

@@ -88,5 +88,5 @@ void Bureaucrat::executeForm(AForm &f)
 	if (!e)
 		std::cout << name << " executed " << f.getName() << std::endl;
 	else
-		std::cout << name << " couldn't sign " << f.getName() << " because " << e << std::endl;
+		std::cout << name << " couldn't execute " << f.getName() << " because " << e << std::endl;
 }
