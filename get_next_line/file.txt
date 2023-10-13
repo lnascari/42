@@ -1,6 +1,0 @@
-abcde
-fghij
-klmnopq
-r
-st
-uv
