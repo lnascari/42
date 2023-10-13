@@ -1,6 +1,8 @@
 #include "Cure.hpp"
 
-Cure::Cure() : AMateria("cure") {
+Cure::Cure() : AMateria("cure")
+{
+	std::cout << "Cure constructor" << std::endl;
 	type = "cure";
 }
 
@@ -15,7 +17,10 @@ Cure & Cure::operator=(const Cure & c)
 	return *this;
 }
 
-Cure::~Cure() {}
+Cure::~Cure()
+{
+	std::cout << "Cure destructor" << std::endl;
+}
 
 AMateria *Cure::clone() const
 {

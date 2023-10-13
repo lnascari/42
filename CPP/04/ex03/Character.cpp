@@ -2,6 +2,7 @@
 
 Character::Character(std::string name)
 {
+	std::cout << "Character constructor" << std::endl;
 	this->name = name;
 	nItems = 0;
 }
@@ -24,7 +25,9 @@ Character &Character::operator=(const Character &c)
 	return *this;
 }
 
-Character::~Character() {
+Character::~Character()
+{
+	std::cout << "Character destructor" << std::endl;
 	for (int i = 0; i < nItems; i++)
 		delete inventory[i];
 }

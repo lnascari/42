@@ -2,6 +2,7 @@
 
 AMateria::AMateria(std::string const &type)
 {
+	std::cout << "AMateria constructor" << std::endl;
 	this->type = type;
 }
 
@@ -18,7 +19,10 @@ AMateria &AMateria::operator=(const AMateria &m)
 	return *this;
 }
 
-AMateria::~AMateria() {}
+AMateria::~AMateria()
+{
+	std::cout << "AMateria destructor" << std::endl;
+}
 
 std::string const &AMateria::getType() const
 {

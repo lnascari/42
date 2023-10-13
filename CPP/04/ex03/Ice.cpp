@@ -1,6 +1,8 @@
 #include "Ice.hpp"
 
-Ice::Ice() : AMateria("ice") {
+Ice::Ice() : AMateria("ice")
+{
+	std::cout << "Ice constructor" << std::endl;
 	type = "ice";
 }
 
@@ -15,7 +17,10 @@ Ice & Ice::operator=(const Ice & i)
 	return *this;
 }
 
-Ice::~Ice() {}
+Ice::~Ice()
+{
+	std::cout << "Ice destructor" << std::endl;
+}
 
 AMateria *Ice::clone() const
 {

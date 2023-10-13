@@ -2,6 +2,7 @@
 
 MateriaSource::MateriaSource()
 {
+	std::cout << "MateriaSource constructor" << std::endl;
 	mCount = 0;
 }
 
@@ -24,6 +25,7 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &s)
 
 MateriaSource::~MateriaSource()
 {
+	std::cout << "MateriaSource destructor" << std::endl;
 	for (int i = 0; i < mCount; i++)
 		delete m[i];
 }
