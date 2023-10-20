@@ -20,7 +20,12 @@ Cat::Cat(const Cat &c) : Animal(c)
 
 Cat &Cat::operator=(const Cat &c)
 {
-	(void) c;
+	if (this == &c)
+		return *this;
+	delete brain;
+	brain = new Brain();
+	for (int i = 0; i < 100; i++)
+		brain->setIdea(c.brain->getIdea(i), i);
 	return *this;
 }
 
@@ -39,9 +44,4 @@ void Cat::printIdea(int index)
 {
 	if (index >= 0 && index <= 5)
 		std::cout << brain->getIdea(index) << std::endl;
-}
-
-std::string Cat::getType() const
-{
-	return type;
 }

@@ -1,4 +1,4 @@
-FILES = Dog.cpp Cat.cpp Brain.cpp
+FILES = Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 
 OBJ = $(FILES:.cpp=.o)
 
