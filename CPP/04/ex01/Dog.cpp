@@ -20,7 +20,12 @@ Dog::Dog(const Dog &d) : Animal(d)
 
 Dog &Dog::operator=(const Dog &d)
 {
-	(void) d;
+	if (this == &d)
+		return *this;
+	delete brain;
+	brain = new Brain();
+	for (int i = 0; i < 100; i++)
+		brain->setIdea(d.brain->getIdea(i), i);
 	return *this;
 }
 
