@@ -31,3 +31,8 @@ std::string Animal::getType() const
 {
 	return type;
 }
+
+void Animal::printIdea(int index)
+{
+	(void) index;
+}
