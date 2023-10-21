@@ -1,95 +1,57 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 13:20:37 by lnascari          #+#    #+#             */
-/*   Updated: 2022/12/01 14:37:49 by lnascari         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <unistd.h>
-#include <stdlib.h>
 #include "get_next_line.h"
 
-static char	*ft_read(char *s, int fd)
+char	*read_line(char *str, int fd)
 {
 	char	*tmp;
-	int		check;
+	int 	size;
 
-	check = 1;
-	tmp = ft_calloc(1, BUFFER_SIZE + 1);
-	if (!s)
-		s = ft_calloc(1, 1);
-	while (check > 0 && !ft_strchr(s, '\n'))
+	size = BUFFER_SIZE;
+	if (!str)
+		str = ft_calloc(1, sizeof(char));
+	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	while (size == BUFFER_SIZE && !ft_strchr(str, '\n'))
 	{
-		check = read(fd, tmp, BUFFER_SIZE);
-		tmp[check] = '\0';
-		s = ft_strjoin(s, tmp);
+		size = read(fd, tmp, BUFFER_SIZE);
+		tmp[size] = 0;
+		str = ft_strjoin(str, tmp);
 	}
 	free(tmp);
-	return (s);
-}
-
-static char	*new_str(char *s)
-{
-	int		size;
-	int		i;
-	char	*str;
-	char	*tmp;
-
-	if (!ft_strchr(s, '\n'))
-	{
-		free(s);
-		return (0);
-	}
-	tmp = ft_strchr(s, '\n') + 1;
-	size = ft_strlen(tmp);
-	str = ft_calloc(size + 1, 1);
-	if (!str)
-		return (0);
-	i = -1;
-	while (tmp[++i])
-		str[i] = tmp[i];
-	free(s);
 	return (str);
 }
 
-static char	*get_line(char *s)
+size_t	line_len(char *s)
 {
-	int		size;
-	int		i;
-	char	*line;
+	size_t	i;
 
-	size = 0;
-	if (!s[size])
-		return (0);
-	while (s[size] && s[size] != '\n')
-		size++;
-	if (s[size] == '\n')
-		size++;
-	line = ft_calloc(size + 1, 1);
-	if (!line)
-		return (0);
 	i = -1;
-	while (++i < size)
-		line[i] = s[i];
-	return (line);
+	while (s[++i])
+	{
+		if(s[i] == '\n')
+			return (i + 1);
+	}
+	return (i);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*s;
+	static char	*str;
 	char		*line;
+	char		*tmp;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (0);
-	s = ft_read(s, fd);
-	if (!s)
+	str = read_line(str, fd);
+	if (!str || !str[0])
+	{
+		free(str);
+		str = 0;
 		return (0);
-	line = get_line(s);
-	s = new_str(s);
-	return (line);
+	}
+	line = ft_substr(str, 0, line_len(str));
+	tmp = ft_strchr(str, '\n');
+	if (tmp)
+		tmp = ft_substr(str, line_len(str), ft_strlen(tmp + 1));
+	free(str);
+	str = tmp;
+	return line;
 }
