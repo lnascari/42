@@ -96,6 +96,8 @@
 		"__verbose_abort": "cpp",
 		"ios": "cpp",
 		"locale": "cpp",
-		"queue": "cpp"
+		"queue": "cpp",
+		"get_next_line_bonus.h": "c",
+		"get_next_line.h": "c"
 	}
 }

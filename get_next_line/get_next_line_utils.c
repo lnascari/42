@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/22 12:30:43 by lnascari          #+#    #+#             */
+/*   Updated: 2023/10/22 12:30:43 by lnascari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -52,7 +64,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!str)
 		return (0);
 	i = 0;
-    j = 0;
+	j = 0;
 	while (s1[j])
 		str[i++] = s1[j++];
 	j = 0;

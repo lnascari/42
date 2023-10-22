@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnascari <lnascari@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/22 12:30:39 by lnascari          #+#    #+#             */
-/*   Updated: 2023/10/22 12:30:40 by lnascari         ###   ########.fr       */
+/*   Created: 2023/10/22 12:31:03 by lnascari          #+#    #+#             */
+/*   Updated: 2023/10/22 12:31:04 by lnascari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_line(char *str, int fd)
 {
@@ -46,24 +46,24 @@ size_t	line_len(char *s)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[4096];
 	char		*line;
 	char		*tmp;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) < 0)
 		return (0);
-	str = read_line(str, fd);
-	if (!str || !str[0])
+	str[fd] = read_line(str[fd], fd);
+	if (!str[fd] || !str[fd][0])
 	{
-		free(str);
-		str = 0;
+		free(str[fd]);
+		str[fd] = 0;
 		return (0);
 	}
-	line = ft_substr(str, 0, line_len(str));
-	tmp = ft_strchr(str, '\n');
+	line = ft_substr(str[fd], 0, line_len(str[fd]));
+	tmp = ft_strchr(str[fd], '\n');
 	if (tmp)
-		tmp = ft_substr(str, line_len(str), ft_strlen(tmp + 1));
-	free(str);
-	str = tmp;
+		tmp = ft_substr(str[fd], line_len(str[fd]), ft_strlen(tmp + 1));
+	free(str[fd]);
+	str[fd] = tmp;
 	return (line);
 }
