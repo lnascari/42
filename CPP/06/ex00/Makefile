@@ -2,7 +2,7 @@ FILES = ScalarConverter.cpp
 
 OBJ = $(FILES:.cpp=.o)
 
-NAME = scalarconverter
+NAME = convert
 
 $(NAME): main.cpp $(OBJ)
 	c++ -Wall -Wextra -Werror -std=c++98 main.cpp $(OBJ) -o $(NAME)
