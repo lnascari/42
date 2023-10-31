@@ -73,8 +73,6 @@ void ScalarConverter::printConv(char c, int n, float f, double d, bool pinf, boo
 		std::cout << "nanf" << std::endl;
 	else if (pinf || minf)
 		std::cout << (pinf ? "+inff" : "-inff") << std::endl;
-	else if (d > FLT_MAX || d < FLT_MIN)
-		std::cout << "Overflow" << std::endl;
 	else
 		std::cout << f << std::endl;
 	std::cout << "double: ";
@@ -82,8 +80,6 @@ void ScalarConverter::printConv(char c, int n, float f, double d, bool pinf, boo
 		std::cout << "nan" << std::endl;
 	else if (pinf || minf)
 		std::cout << (pinf ? "+inf" : "-inf") << std::endl;
-	else if (d > DBL_MAX || d < DBL_MIN)
-		std::cout << "Overflow" << std::endl;
 	else
 		std::cout << d << std::endl;
 }
