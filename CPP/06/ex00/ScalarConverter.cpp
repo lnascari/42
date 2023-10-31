@@ -33,7 +33,7 @@ bool ScalarConverter::isInt(std::string str)
 	std::stringstream s(str);
 	int n;
 	s >> n;
-	return !s.fail();
+	return !s.fail() && s.eof();
 }
 
 bool ScalarConverter::isFloat(std::string str)
@@ -41,7 +41,7 @@ bool ScalarConverter::isFloat(std::string str)
 	std::stringstream s(str);
 	float f;
 	s >> f;
-	return !s.fail();
+	return !s.fail() && s.eof();
 }
 
 bool ScalarConverter::isDouble(std::string str)
@@ -49,7 +49,7 @@ bool ScalarConverter::isDouble(std::string str)
 	std::stringstream s(str);
 	double d;
 	s >> d;
-	return !s.fail();
+	return !s.fail() && s.eof();
 }
 
 void ScalarConverter::printConv(char c, int n, float f, double d, bool pinf, bool minf)
@@ -60,7 +60,7 @@ void ScalarConverter::printConv(char c, int n, float f, double d, bool pinf, boo
 	else if (c == 127 || (c >= 0 && c <= 31))
 		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << ((d > 127 || d < 128) ? "Overflow" : (std::string("'")+c)+"'") << std::endl;
+		std::cout << ((d > 127 || d < 0) ? "Overflow" : (std::string("'")+c)+"'") << std::endl;
 	std::cout << "int: ";
 	if (pinf || minf)
 		std::cout << "Impossible" << std::endl;
