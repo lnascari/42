@@ -1,15 +1,9 @@
-FILES = Serializer.cpp
-
-OBJ = $(FILES:.cpp=.o)
+HEADERS = Base.hpp A.hpp B.hpp C.hpp
 
 NAME = convert
 
-$(NAME): main.cpp $(OBJ)
-	c++ -Wall -Wextra -Werror -std=c++98 main.cpp $(OBJ) -o $(NAME)
-
-%.o: %.cpp %.hpp
-	c++ -c -Wall -Wextra -Werror -std=c++98 $(@:.o=.cpp)
+$(NAME): main.cpp $(HEADERS)
+	c++ -Wall -Wextra -Werror -std=c++98 main.cpp -o $(NAME)
 
 clean:
-	rm -f ./*.o
 	rm -f $(NAME)
