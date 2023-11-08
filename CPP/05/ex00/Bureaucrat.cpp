@@ -18,7 +18,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name)
 		this->grade = grade;
 	}
 	catch(const std::exception& e) {
-		this->grade = 1;
+		this->grade = 150;
 		std::cout << e.what() << std::endl;
 	}
 }
@@ -32,7 +32,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &b)
 {
 	if(this == &b)
 		return *this;
-	name = b.name;
 	grade = b.grade;
 	return *this;
 }

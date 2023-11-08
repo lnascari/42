@@ -3,10 +3,10 @@
 int main()
 {
 	Bureaucrat b("franco", 170);
-	b.increment();
+	b.decrement();
 	std::cout << b;
 	for (size_t i = 0; i < 150; i++)
-		b.decrement();
+		b.increment();
 	std::cout << b;
 	Bureaucrat b2("paolo", 7);
 	std::cout << b2;
