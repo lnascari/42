@@ -1,16 +1,17 @@
 #include <iostream>
+#include <string>
 #include "iter.hpp"
 
-void toupper(int &c)
+template <typename T> void toupper(T &c)
 {
 	if (c >= 'a' && c <= 'z')
-		c =- 32;
+		c -= 32;
 }
 
 int main( void )
 {
-	char *str = "	giambaTTistA ;42";
+	char str[18] = {'	', 'g', 'i', 'a', 'm', 'b', 'a', 'T', 'T', 'i', 's', 't', 'A', ' ', ';' , '4', '2', 0};
 	std::cout << "str: " << str << std::endl;
-	iter<char>(str, 18, toupper);
+	iter(str, 17, toupper);
 	std::cout << "new str: " << str << std::endl;
 }
