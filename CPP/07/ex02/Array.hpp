@@ -26,7 +26,10 @@ public:
 	}
 	Array(const Array &a)
 	{
-		*this = a;
+		arr = new T[a.n];
+		n = a.n;
+		for (size_t i = 0; i < a.n; i++)
+			arr[i] = a.arr[i];
 	}
 	Array &operator=(const Array &a)
 	{
