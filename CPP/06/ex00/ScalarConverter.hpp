@@ -11,6 +11,10 @@
 class ScalarConverter
 {
 private:
+	ScalarConverter();
+	ScalarConverter(const ScalarConverter &s);
+	ScalarConverter &operator=(const ScalarConverter &s);
+	~ScalarConverter();
 	static bool isInt(std::string str);
 	static bool isFloat(std::string str);
 	static bool isDouble(std::string str);
