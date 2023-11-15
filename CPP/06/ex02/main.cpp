@@ -28,6 +28,8 @@ void identify(Base *p)
         std::cout << "Ptr is type B" << std::endl;
     else if (dynamic_cast<C*>(p))
         std::cout << "Ptr is type C" << std::endl;
+    else
+        std::cout << "Ptr is unknown type" << std::endl;
 }
 
 void identify(Base &p)
@@ -61,6 +63,7 @@ int main()
         Base *p = generate();
         identify(p);
         identify(*p);
+        std::cout << std::endl;
         delete p;
     }
 }
