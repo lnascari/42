@@ -31,6 +31,7 @@ public:
 	Span &operator=(const Span &s);
 	~Span();
 	void addNumber(int n);
+	void addNumber(int first, int last);
 	int shortestSpan();
 	int longestSpan();
 };

@@ -29,6 +29,13 @@ void Span::addNumber(int n)
 	i++;
 }
 
+void Span::addNumber(int count, int n)
+{
+	if (i + count >= N)
+		throw ArrayFullException();
+	v.insert(v.begin(), count, n);
+}
+
 int Span::shortestSpan()
 {
 	if (v.size() < 2)
