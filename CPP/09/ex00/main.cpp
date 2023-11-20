@@ -17,7 +17,8 @@ int main(int argc, char **argv)
 			f.close();
 		}
 		while (std::getline(f, str)) {
-			std::cout << str << std::endl;
+			std::stringstream date(std::strtok((char *) str.c_str(), " | "));
+			std::stringstream value(std::strtok((char *) str.c_str(), " | "));
 		}
 		
 		f.close();
