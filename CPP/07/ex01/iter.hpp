@@ -7,7 +7,7 @@ template <typename T> void toupper(T &c)
 		c -= 32;
 }
 
-template <typename T> void iter(T *arr, size_t len, void (*f)(T &el))
+template <typename T, typename A> void iter(T *arr, size_t len, void (*f)(A &el))
 {
 	for (size_t i = 0; i < len; i++)
 		f(arr[i]);
