@@ -16,6 +16,7 @@ int main(int argc, char **argv)
 			std::cerr << "Error: bad format" << std::endl;
 			f.close();
 		}
+		std::map<std::string, double> input;
 		while (std::getline(f, str)) {
 			char * date(std::strtok((char *) str.c_str(), " | "));
 			char * value = std::strtok(0, " | ");
