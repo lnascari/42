@@ -17,8 +17,33 @@ int main(int argc, char **argv)
 			f.close();
 		}
 		while (std::getline(f, str)) {
-			std::stringstream date(std::strtok((char *) str.c_str(), " | "));
-			std::stringstream value(std::strtok((char *) str.c_str(), " | "));
+			char * date(std::strtok((char *) str.c_str(), " | "));
+			char * value = std::strtok(0, " | ");
+			if (!date || !value) {
+				std::cerr << "Error: bad input => " << str << std::endl;
+				continue;
+			}
+			struct tm tm;
+			if (!strptime(date, "%Y-%m-%d", &tm) || strptime(date, "%Y-%m-%d", &tm)[0]) {
+				std::cerr << "Error: invalid date." << std::endl;
+				continue;
+			}
+			std::stringstream s(value);
+			double d;
+			s >> d;
+			if (s.fail() || !s.eof()) {
+				std::cerr << "Error: invalid value." << std::endl;
+				continue;
+			}
+			if (d < 0) {
+				std::cerr << "Error: not a positive number." << std::endl;
+				continue;
+			}
+			if (d > 147483648) {
+				std::cerr << "Error: too large number." << std::endl;
+				continue;
+			}
+			
 		}
 		
 		f.close();
