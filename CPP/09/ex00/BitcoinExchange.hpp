@@ -25,6 +25,7 @@ public:
 	BitcoinExchange(const BitcoinExchange &b);
 	BitcoinExchange &operator=(const BitcoinExchange &b);
 	~BitcoinExchange();
+	double getValue(std::string date, double n);
 };
 
 #endif

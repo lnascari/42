@@ -6,6 +6,7 @@ int main(int argc, char **argv)
 		return 1;
 	try
 	{
+		BitcoinExchange b();
 		std::ifstream f;
 		f.open(argv[1]);
 		if (!f)
@@ -15,43 +16,42 @@ int main(int argc, char **argv)
 		if (str != "date | value") {
 			std::cerr << "Error: bad format" << std::endl;
 			f.close();
+			return 1;
 		}
-		std::map<std::string, double> input;
 		while (std::getline(f, str)) {
-			char * date(std::strtok((char *) str.c_str(), " | "));
-			char * value = std::strtok(0, " | ");
+			char *date(std::strtok((char *) str.c_str(), " | "));
+			char *value = std::strtok(0, " | ");
 			if (!date || !value) {
 				std::cerr << "Error: bad input => " << str << std::endl;
 				continue;
 			}
 			struct tm tm;
-			if (!strptime(date, "%Y-%m-%d", &tm) || strptime(date, "%Y-%m-%d", &tm)[0]) {
+			if (date < "2009-01-02" || date > "2022-03-29" || !strptime(date, "%Y-%m-%d", &tm) || strptime(date, "%Y-%m-%d", &tm)[0]) {
 				std::cerr << "Error: invalid date." << std::endl;
 				continue;
 			}
 			std::stringstream s(value);
-			double d;
-			s >> d;
+			double n;
+			s >> n;
 			if (s.fail() || !s.eof()) {
 				std::cerr << "Error: invalid value." << std::endl;
 				continue;
 			}
-			if (d < 0) {
+			if (n < 0) {
 				std::cerr << "Error: not a positive number." << std::endl;
 				continue;
 			}
-			if (d > 147483648) {
+			if (n > 147483648) {
 				std::cerr << "Error: too large number." << std::endl;
 				continue;
 			}
-			
+			std::cout << date << " => " << n << " = " << b.getValue(date, n) << std::endl;
 		}
-		
 		f.close();
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
+		return 1;
 	}
-	
 }
