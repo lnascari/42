@@ -35,7 +35,9 @@ BitcoinExchange::~BitcoinExchange() {}
 
 double BitcoinExchange::getValue(std::string date, double n)
 {
-	(void) date;
-	(void) n;
+	for (std::map<std::string, double>::iterator it = db.begin(); it != db.end(); it++) {
+		if (date == it->first || (date > it->first && date > std::next(it, 1)->first))
+			return n * it->second;
+	}
 	return 0.0;
 }
