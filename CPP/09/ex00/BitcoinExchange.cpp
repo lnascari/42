@@ -6,7 +6,6 @@ BitcoinExchange::BitcoinExchange()
 	f.open("data.csv");
 	if (!f)
 		throw FileException();
-	f.close();
 	std::string str;
 	std::getline(f, str);
 	while (std::getline(f, str)) {
@@ -16,6 +15,7 @@ BitcoinExchange::BitcoinExchange()
 		s >> n;
 		db[date] = n;
 	}
+	f.close();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &b)
