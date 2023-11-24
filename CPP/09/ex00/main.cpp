@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 		return 1;
 	try
 	{
-		BitcoinExchange b();
+		BitcoinExchange b;
 		std::ifstream f;
 		f.open(argv[1]);
 		if (!f)
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 				continue;
 			}
 			struct tm tm;
-			if (date < "2009-01-02" || date > "2022-03-29" || !strptime(date, "%Y-%m-%d", &tm) || strptime(date, "%Y-%m-%d", &tm)[0]) {
+			if (date < std::string("2009-01-02") || date > std::string("2022-03-29") || !strptime(date, "%Y-%m-%d", &tm) || strptime(date, "%Y-%m-%d", &tm)[0]) {
 				std::cerr << "Error: invalid date." << std::endl;
 				continue;
 			}

@@ -35,5 +35,7 @@ BitcoinExchange::~BitcoinExchange() {}
 
 double BitcoinExchange::getValue(std::string date, double n)
 {
+	(void) date;
+	(void) n;
 	return 0.0;
 }
