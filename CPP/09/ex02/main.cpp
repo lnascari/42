@@ -18,9 +18,6 @@ int main(int argc, char *argv[])
 		}
 		arr[i - 1] = atoi(argv[i]);
 	}
-	std::cout << "Before:\t";
-	for (int i = 0; i < argc - 1; i++)
-		std::cout << arr[i] << " ";
-	std::cout << std::endl << "After:\t";
 	PmergeMe p(arr, argc - 1);
+	p.sort();
 }

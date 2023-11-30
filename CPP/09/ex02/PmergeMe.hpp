@@ -1,6 +1,7 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <sys/time.h>
 #include <iostream>
 #include <vector>
 #include <deque>
@@ -10,7 +11,7 @@ class PmergeMe
 private:
 	std::vector<int> v;
 	std::deque<int> d;
-	template <typename T> void insertionSort(T arr, int begin, int end)
+	template <typename T> void insertionSort(T &arr, int begin, int end)
 	{
 		for (int i = begin; i < end; i++) {
 			for (int j = i; j > begin && arr[j - 1] > arr[j]; j--) {
@@ -20,14 +21,26 @@ private:
 			}
 		}
 	}
-	template <typename T> void mergeSort(T a, T b, int begin, int end)
+	template <typename T> void merge(T &a, T &b, int begin, int middle, int end)
+	{
+		for (int i = begin, j = middle, k = begin; k < end; k++) {
+			if (i < middle && (j >= end || a[i] <= a[j]))
+				b[k] = a[i++];
+			else
+				b[k] = a[j++];
+		}
+	}
+	template <typename T> void mergeSort(T &a, int begin, int end)
 	{
 		if (end - begin <= 5)
-			insertionSort(b, begin, end);
+			insertionSort(a, begin, end);
 		else {
 			int middle = (begin + end) / 2;
-			mergeSort(a, b, begin, middle);
-			mergeSort(a, b, middle, end);
+			mergeSort(a, begin, middle);
+			mergeSort(a, middle, end);
+			T b = a;
+			merge(a, b, begin, middle, end);
+			a = b;
 		}
 	}
 public:
