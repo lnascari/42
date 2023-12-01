@@ -28,16 +28,22 @@ PmergeMe::~PmergeMe() {}
 
 void PmergeMe::sort()
 {
-	struct timeval	tv;
+	struct timespec	ts;
+	long start;
 	std::cout << "Before:\t";
 	for (size_t i = 0; i < v.size(); i++)
 		std::cout << v[i] << " ";
-	gettimeofday(&tv, 0);
-	int start = tv.tv_usec;
+	clock_gettime(CLOCK_REALTIME, &ts);
+	start = ts.tv_nsec;
 	mergeSort(v, 0, v.size());
-	gettimeofday(&tv, 0);
+	clock_gettime(CLOCK_REALTIME, &ts);
 	std::cout << std::endl << "After:\t";
 	for (size_t i = 0; i < v.size(); i++)
 		std::cout << v[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl << "Time to process a range of " << v.size() << " elements with std::vector:\t" << ts.tv_nsec - start << " ns";
+	clock_gettime(CLOCK_REALTIME, &ts);
+	start = ts.tv_nsec;
+	mergeSort(d, 0, d.size());
+	clock_gettime(CLOCK_REALTIME, &ts);
+	std::cout << std::endl << "Time to process a range of " << d.size() << " elements with std::deque:\t" << ts.tv_nsec - start << " ns" << std::endl;
 }
