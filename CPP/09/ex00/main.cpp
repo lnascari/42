@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 				std::cerr << "Error: not a positive number." << std::endl;
 				continue;
 			}
-			if (n > 147483648) {
+			if (n > 1000) {
 				std::cerr << "Error: too large number." << std::endl;
 				continue;
 			}
