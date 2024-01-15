@@ -1,6 +1,14 @@
 services:
-        nginx:
-                build: ./requirements/nginx/
-                image: nginx
-                ports:
-                - "80:80"
+    nginx:
+        build: ./requirements/nginx/
+        image: nginx
+        ports:
+            - "80:80"
+        volumes:
+            - website:/usr/share/nginx/html
+    volumes:
+        website:
+            driver: local
+            driver_opts:
+                o: bind
+                device: ~/data/website
