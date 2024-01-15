@@ -10,5 +10,6 @@ volumes:
     website:
         driver: local
         driver_opts:
+            type: none
             o: bind
             device: ~/data/website
