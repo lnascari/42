@@ -7,3 +7,6 @@ up:
 
 down:
 	cd srcr && docker-compose down --volumes
+
+clean: down
+	rm -rf ~/data
