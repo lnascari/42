@@ -7,6 +7,12 @@ services:
         volumes:
             - website:/www
         restart: always
+    wordpress:
+        build: ./requirements/wordpress/
+        image: wordpress
+        volumes:
+            - website:/tmp
+        restart: always
 volumes:
     website:
         driver: local
