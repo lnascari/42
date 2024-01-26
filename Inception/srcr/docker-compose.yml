@@ -10,6 +10,8 @@ services:
     wordpress:
         build: ./requirements/wordpress/
         image: wordpress
+        volumes:
+            - website:/www
         restart: always
 volumes:
     website:
