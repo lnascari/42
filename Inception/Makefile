@@ -11,7 +11,4 @@ down:
 clean: down
 	docker system prune -a --volumes
 
-fclean: clean
-	rm -rf ~/data
-
 re: clean all	
