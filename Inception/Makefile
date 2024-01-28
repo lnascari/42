@@ -11,4 +11,4 @@ down:
 clean: down
 	docker system prune -a --volumes
 
-re: clean all	
+re: clean all
