@@ -1,5 +1,9 @@
 #!/bin/sh
 
-echo "CREATE DATABASE wp;" > /tmp/a.sql
+cat << EOF > /tmp/init.sql
+CREATE DATABASE wp;
+GRANT ALL PRIVILEGES ON wp.* TO ${MYSQL_USER}@localhost IDENTIFIED BY '${MYSQL_PASSWORD}';
 
-mysqld_safe --init-file=/tmp/a.sql --user=root
+EOF
+
+mysqld_safe --init-file=/tmp/init.sql --user=root
