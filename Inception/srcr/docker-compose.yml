@@ -1,7 +1,10 @@
+version: '3.8'
 services:
     nginx:
         build: ./requirements/nginx/
         image: nginx
+        depends_on:
+            - wordpress
         ports:
             - "443:443"
         volumes:
@@ -11,9 +14,11 @@ services:
         build:
             context: ./requirements/wordpress/
             args:
-                MYSQL_USER: ${MYSQL_USER}
-                MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+                - MYSQL_USER=${MYSQL_USER}
+                - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         image: wordpress
+        depends_on:
+            - mariadb
         volumes:
             - website:/www
         restart: always

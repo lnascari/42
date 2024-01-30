@@ -1,5 +1,9 @@
 FROM alpine:3.18.5
 
+ARG MYSQL_USER
+
+ARG MYSQL_PASSWORD
+
 RUN apk update \
     && apk add php php-fpm php-mysqli \
     && mkdir /www
@@ -15,6 +19,6 @@ COPY ./conf/www.conf /etc/php81/php-fpm.d/www.conf
 
 COPY ./tools/config.sh /tmp/config.sh
 
-RUN /tmp/config.sh
+RUN /tmp/config.sh ${MYSQL_USER} ${MYSQL_PASSWORD}
 
 CMD ["php-fpm81", "-F"]

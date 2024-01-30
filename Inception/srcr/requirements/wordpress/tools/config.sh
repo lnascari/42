@@ -3,8 +3,8 @@
 cat << EOF > /www/wp-config.php
 <?php
 define( 'DB_NAME', 'wp' );
-define( 'DB_USER', '${MYSQL_USER}' );
-define( 'DB_PASSWORD', '${MYSQL_PASSWORD}' );
+define( 'DB_USER', '$1' );
+define( 'DB_PASSWORD', '$2' );
 define( 'DB_HOST', 'mariadb' );
 define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
