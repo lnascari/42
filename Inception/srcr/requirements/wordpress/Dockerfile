@@ -13,4 +13,8 @@ RUN wget https://wordpress.org/latest.tar.gz \
 
 COPY ./conf/www.conf /etc/php81/php-fpm.d/www.conf
 
+COPY ./tools/config.sh /tmp/config.sh
+
+RUN /tmp/config.sh
+
 CMD ["php-fpm81", "-F"]

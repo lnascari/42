@@ -8,7 +8,11 @@ services:
             - website:/www
         restart: always
     wordpress:
-        build: ./requirements/wordpress/
+        build:
+            context: ./requirements/wordpress/
+            args:
+                MYSQL_USER: ${MYSQL_USER}
+                MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         image: wordpress
         volumes:
             - website:/www
