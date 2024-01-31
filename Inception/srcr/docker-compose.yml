@@ -9,6 +9,8 @@ services:
             - "443:443"
         volumes:
             - website:/www
+        networks:
+            - docker-network
         restart: always
     wordpress:
         build:
@@ -21,6 +23,8 @@ services:
             - mariadb
         volumes:
             - website:/www
+        networks:
+            - docker-network
         restart: always
     mariadb:
         build: ./requirements/mariadb/
@@ -29,6 +33,10 @@ services:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        volumes:
+            - database:/var/lib/mysql
+        networks:
+            - docker-network
         restart: always
 volumes:
     website:
@@ -37,3 +45,12 @@ volumes:
             type: none
             o: bind
             device: ~/data/website
+    database:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: ~/data/database
+networks:
+    docker-network:
+        driver: bridge
