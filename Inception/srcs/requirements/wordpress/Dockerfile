@@ -19,6 +19,8 @@ COPY ./conf/www.conf /etc/php81/php-fpm.d/www.conf
 
 COPY ./tools/config.sh /tmp/config.sh
 
+RUN chmod 777 /tmp/config.sh
+
 RUN /tmp/config.sh ${MYSQL_USER} ${MYSQL_PASSWORD}
 
 CMD ["php-fpm81", "-F"]

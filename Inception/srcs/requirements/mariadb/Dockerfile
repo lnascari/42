@@ -9,4 +9,6 @@ RUN apk update \
 
 COPY ./tools/setup.sh /tmp/setup.sh
 
+RUN chmod 777 /tmp/setup.sh
+
 CMD ["/tmp/setup.sh"]
