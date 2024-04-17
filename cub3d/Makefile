@@ -9,6 +9,7 @@ NAME = cub3D
 
 all: $(NAME)
 	$(MAKE) -C ./libft
+	cd minilibx-linux && make && cd ..
 	cc -Wall -Wextra -Werror main.c $(NAME).a ./libft/libft.a minilibx-linux/libmlx.a -lXext -lX11 -lm -lz -o $(NAME)
 $(NAME): $(OBJ)
 	ar -crs $(NAME).a $?
