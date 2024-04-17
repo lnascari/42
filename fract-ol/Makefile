@@ -7,6 +7,7 @@ NAME = fractol.a
 LIBS = minilibx-linux/libmlx_Linux.a -lXext -lX11 -lm -lz
 
 all: $(NAME)
+	cd minilibx-linux && make && cd ..
 	gcc -Wall -Wextra -Werror main.c fractol.a minilibx-linux/libmlx.a -lXext -lX11 -lm -lz -o fractol
 $(NAME): $(OBJ)
 	ar -crs $(NAME) $?
