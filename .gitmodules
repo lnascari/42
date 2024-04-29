@@ -7,3 +7,6 @@
 [submodule "ft_irc"]
 	path = ft_irc
 	url = https://github.com/jblackiex/42_IRC.git
+[submodule "ft_transcendence"]
+	path = ft_transcendence
+	url = https://github.com/jblackiex/42_Transcendence.git
